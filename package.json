@@ -1,0 +1,47 @@
+{
+  "name": "blocknote",
+  "widgetName": "BlockNote",
+  "version": "1.0.0",
+  "description": "Block-Based React rich text editor. Easily add a modern text editing experience to your app. Based on https://www.npmjs.com/package/@blocknote/react.",
+  "copyright": "© Mendix Technology BV 2022. All rights reserved.",
+  "author": "Stoneworx",
+  "engines": {
+    "node": ">=16"
+  },
+  "license": "MPL 2.0",
+  "config": {
+    "projectPath": "../../",
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000
+  },
+  "packagePath": "stoneworx",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server",
+    "dev": "pluggable-widgets-tools start:web",
+    "build": "pluggable-widgets-tools build:web",
+    "lint": "pluggable-widgets-tools lint",
+    "lint:fix": "pluggable-widgets-tools lint:fix",
+    "prerelease": "npm run lint",
+    "release": "pluggable-widgets-tools release:web"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "^10.15.0",
+    "@rollup/plugin-json": "^6.1.0",
+    "@types/big.js": "^6.0.2"
+  },
+  "dependencies": {
+    "blocknote-react": "^1.0.16",
+    "classnames": "^2.2.6",
+    "react-remove-scroll-bar": "^2.3.8"
+  },
+  "resolutions": {
+    "react": "^18.2.0",
+    "@types/react": "^18.2.0",
+    "react-native": "0.72.7"
+  },
+  "overrides": {
+    "react": "^18.2.0",
+    "@types/react": "^18.2.0",
+    "react-native": "0.72.7"
+  }
+}

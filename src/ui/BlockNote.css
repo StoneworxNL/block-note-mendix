@@ -1,0 +1,18 @@
+
+.blocknote-save-btn {
+    padding-bottom: 10px;
+}
+
+.blocknote-save-btn .btn, .blocknote-save-btn .mx-button {
+    border: none;
+    border-radius: 6px;
+    width: 100px;
+}
+
+.bn-side-menu .bn-drag-handle {
+    padding-top: 5px;
+}
+
+.blocknote-mx-dark h1, .blocknote-mx-dark h2, .blocknote-mx-dark h3  {
+    color: #cfcfcf;
+}

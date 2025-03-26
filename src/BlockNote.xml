@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget
+    id="stoneworx.blocknote.BlockNote"
+    pluginWidget="true"
+    needsEntityContext="true"
+    offlineCapable="true"
+    supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd"
+>
+    <name>Block Note</name>
+    <description>
+        Block-Based React rich text editor. Easily add a modern text editing experience to your app. Based on
+        https://www.npmjs.com/package/@blocknote/react.
+    </description>
+    <icon />
+    <properties>
+        <propertyGroup caption="General">
+            <property key="jsonAttribute" type="attribute">
+                <caption>JSON Configuration</caption>
+                <description>Configuration JSON string. Can be used both for the initial configuration, as well as to save it afterwards.</description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                </attributeTypes>
+            </property>
+            <property key="jsonExpression" type="expression">
+                <caption>Initial Configuration</caption>
+                <description>Initial Configuration (JSON string).</description>
+                <returnType assignableTo="jsonAttribute" />
+            </property>
+            <property key="isEditable" type="boolean" defaultValue="true">
+                <caption>Editable</caption>
+                <description />
+            </property>
+            <property key="saveAction" type="action">
+                <caption>Save Action</caption>
+                <description>Action to be performed when button is clicked (if auto-save is false) or onChange (if auto-save is true).</description>
+            </property>
+            <property key="themeEnum" type="enumeration" defaultValue="light">
+                <caption>Theme</caption>
+                <description />
+                <enumerationValues>
+                    <enumerationValue key="light">Light</enumerationValue>
+                    <enumerationValue key="green">Dark</enumerationValue>
+                </enumerationValues>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
