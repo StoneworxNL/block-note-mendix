@@ -7,8 +7,13 @@
 Mendix pluggable widget where you can simply add an editor to your web application.
 Full list of features can be checked on the [Block Note's documentation](https://github.com/joaodelopes/block-note-mendix/blob/main/images/logo.jpeg).
 
+### Light
 ![Light Mode](https://github.com/joaodelopes/block-note-mendix/blob/main/images/lightmodedemo.png)
+
+### Dark
 ![Dark Mode](https://github.com/joaodelopes/block-note-mendix/blob/main/images/darkmodedemo.png)
+
+### View-only
 ![Edit Mode](https://github.com/joaodelopes/block-note-mendix/blob/main/images/viewmodedemo.png)
 
 
