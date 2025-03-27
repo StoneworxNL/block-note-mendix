@@ -1,7 +1,7 @@
 ## BlockNote
 [Block-Based React rich text editor. Easily add a modern text editing experience to your app. Based on https://www.npmjs.com/package/@blocknote/react.]
 
-<img src="[https://github.com/favicon.ico](https://github.com/joaodelopes/block-note-mendix/blob/main/images/logo.jpeg)" width="200px">
+<img src="https://github.com/joaodelopes/block-note-mendix/blob/main/images/logo.jpeg" width="65px"/>
 
 ## Features
 Mendix pluggable widget where you can simply add an editor to your web application.
