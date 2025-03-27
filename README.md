@@ -1,24 +1,31 @@
 ## BlockNote
 [Block-Based React rich text editor. Easily add a modern text editing experience to your app. Based on https://www.npmjs.com/package/@blocknote/react.]
 
+![Block Note Mendix Pluggable Widget Logo](https://github.com/joaodelopes/block-note-mendix/blob/main/images/logo.jpeg)
+
+
 ## Features
-[feature highlights]
+Mendix pluggable widget where you can simply add an editor to your web application.
+Full list of features can be checked on the [Block Note's documentation](https://github.com/joaodelopes/block-note-mendix/blob/main/images/logo.jpeg).
+
+![Light Mode](https://github.com/joaodelopes/block-note-mendix/blob/main/images/lightmodedemo.png)
+![Dark Mode](https://github.com/joaodelopes/block-note-mendix/blob/main/images/darkmodedemo.png)
+![Edit Mode](https://github.com/joaodelopes/block-note-mendix/blob/main/images/viewmodedemo.png)
+
 
 ## Usage
-[step by step instructions]
+1. Create a database entity to store the JSON configuration of the Block Note..
+2. Add a dataview to a page and fetch the aforementioned configuration.
+2. Inside the dataview, add the block-note widget.
+3. Set it as editable (Yes) or Read-only (No) and add a Save action. There's two different inputs for configurations, in case you want to load an initial configuration different than the attribute where you want to save it to.
+
+![Usage in Mendix Studio Pro](https://github.com/joaodelopes/block-note-mendix/blob/main/images/studioproconfig.png)
+
 
 ## Demo project
-[link to sandbox]
+- [Mendix app running on the cloud](https://block-note-demo-sandbox.mxapps.io/index.html?profile=Responsive)
+
 
 ## Issues, suggestions and feature requests
-[link to GitHub issues]
-
-## Development and contribution
-
-1. Install NPM package dependencies by using: `npm install`. If you use NPM v7.x.x, which can be checked by executing `npm -v`, execute: `npm install --legacy-peer-deps`.
-1. Run `npm start` to watch for code changes. On every change:
-    - the widget will be bundled;
-    - the bundle will be included in a `dist` folder in the root directory of the project;
-    - the bundle will be included in the `deployment` and `widgets` folder of the Mendix test project.
-
-[specify contribution]
+Known Issue: Sometimes, when you add text, it automatically scrolls up to the beginning of the block note.
+We are working in improving it and adding features to make this widget more flexible for different purposes. Feel free to suggest us new features and report issues.
