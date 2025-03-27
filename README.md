@@ -18,7 +18,7 @@ Full list of features can be checked on the [Block Note's documentation](https:/
 
 
 ## Usage
-1. Create a database entity to store the JSON configuration of the Block Note..
+1. Create a database entity to store the JSON configuration of the Block Note.
 2. Add a dataview to a page and fetch the aforementioned configuration.
 2. Inside the dataview, add the block-note widget.
 3. Set it as editable (Yes) or Read-only (No) and add a Save action. There's two different inputs for configurations, in case you want to load an initial configuration different than the attribute where you want to save it to.
