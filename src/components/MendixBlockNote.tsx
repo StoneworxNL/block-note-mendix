@@ -1,10 +1,10 @@
 import { ReactElement, createElement, useEffect, useMemo, useState } from "react";
-//import { useCreateBlockNote } from "blocknote-react";
-import { BlockNoteView } from "blocknote-react";
-import { PartialBlock, BlockNoteEditor } from "blocknote-core";
+import { BlockNoteView } from "@blocknote/mantine";
+import { PartialBlock, BlockNoteEditor } from "@blocknote/core";
 import { MendixBlockNoteSave } from "./MendixBlockNoteSave";
-import "blocknote-core/fonts/inter.css";
-import "blocknote-react/style.css";
+import "@blocknote/core/fonts/inter.css";
+import "@blocknote/mantine/style.css";
+
 import { DynamicValue, ActionValue, EditableValue } from "mendix";
 
 export interface BlockNoteProps {
@@ -20,8 +20,10 @@ export function MendixBlockNote({ jsonExpression, jsonAttribute, saveAction, isE
 
     // Loads the previously stored editor contents.
     useEffect(() => {
-        if(jsonExpression && jsonExpression.status === "available" && jsonExpression.value) {
-            setInitialContent(JSON.parse(jsonExpression.value.toString()) as PartialBlock[]);
+        if (jsonExpression && jsonExpression.status === "available") {
+            if (jsonExpression.value)
+                setInitialContent(JSON.parse(jsonExpression.value.toString()) as PartialBlock[]);
+            setInitialContent(JSON.parse('[{"type": "paragraph","props": {"textColor": "default","backgroundColor": "default","textAlignment": "left"},"content": [],"children": []}]') as PartialBlock[]);
         }
     }, [jsonExpression]);
 

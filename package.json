@@ -1,5 +1,6 @@
 {
   "name": "blocknote",
+  "type": "module",
   "widgetName": "BlockNote",
   "version": "1.0.0",
   "description": "Block-Based React rich text editor. Easily add a modern text editing experience to your app. Based on https://www.npmjs.com/package/@blocknote/react.",
@@ -27,11 +28,16 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": "^10.15.0",
     "@rollup/plugin-json": "^6.1.0",
-    "@types/big.js": "^6.0.2"
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@types/big.js": "^6.0.2",
+    "rollup-plugin-typescript2": "^0.36.0"
   },
   "dependencies": {
-    "blocknote-react": "^1.0.16",
+    "@blocknote/core": "^0.26.0",
+    "@blocknote/mantine": "^0.26.0",
+    "@blocknote/react": "^0.26.0",
     "classnames": "^2.2.6",
+    "emoji-mart": "^5.6.0",
     "react-remove-scroll-bar": "^2.3.8"
   },
   "resolutions": {

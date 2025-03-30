@@ -1,5 +1,5 @@
 import { ReactElement, createElement } from "react";
-import { BlockNoteEditor } from "blocknote-core";
+import { BlockNoteEditor } from "@blocknote/core";
 import { ActionValue, EditableValue } from "mendix";
 
 export interface BlockNoteSaveProps {
