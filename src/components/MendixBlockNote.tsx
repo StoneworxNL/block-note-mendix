@@ -23,7 +23,8 @@ export function MendixBlockNote({ jsonExpression, jsonAttribute, saveAction, isE
         if (jsonExpression && jsonExpression.status === "available") {
             if (jsonExpression.value)
                 setInitialContent(JSON.parse(jsonExpression.value.toString()) as PartialBlock[]);
-            setInitialContent(JSON.parse('[{"type": "paragraph","props": {"textColor": "default","backgroundColor": "default","textAlignment": "left"},"content": [],"children": []}]') as PartialBlock[]);
+            else
+                setInitialContent(JSON.parse('[{"type": "paragraph","props": {"textColor": "default","backgroundColor": "default","textAlignment": "left"},"content": [],"children": []}]') as PartialBlock[]);
         }
     }, [jsonExpression]);
 
