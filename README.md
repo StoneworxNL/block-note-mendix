@@ -67,10 +67,7 @@ We are working in improving it and adding features to make this widget more flex
 
 ## About Stoneworx
 
-### We Create Inovation
-
-We started our company as friends and will always remain a club of people that likes doing business in a friendly matter.\
-A group of entrepreneurial, smart and highly experienced Mendix professionals.  
+We started our company as friends and will always remain a club of people that likes doing business in a friendly matter. A group of entrepreneurial, smart and highly experienced Mendix professionals.  
 
 On a daily basis, we create software applications that simplify our clients’ business processes by using the Mendix low code platform. It is our mission is to turn complex ideas into simple solutions for medium to corporate-sized businesses, in any industry.
 
