@@ -9,7 +9,7 @@
   "engines": {
     "node": ">=16"
   },
-  "license": "MPL 2.0",
+  "license": "MIT",
   "config": {
     "projectPath": "../../",
     "mendixHost": "http://localhost:8080",
