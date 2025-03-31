@@ -3,7 +3,7 @@
   "type": "module",
   "widgetName": "BlockNote",
   "version": "1.0.0",
-  "description": "Block-Based React rich text editor. Easily add a modern text editing experience to your app. Based on https://www.npmjs.com/package/@blocknote/react.",
+  "description": "Block-Based React rich text editor. Easily add a modern text editing experience to your app. Based on https://www.npmjs.com/package/@blocknote/core.",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "author": "Stoneworx",
   "engines": {
