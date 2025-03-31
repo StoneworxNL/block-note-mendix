@@ -74,9 +74,7 @@ A group of entrepreneurial, smart and highly experienced Mendix professionals. �
 
 On a daily basis, we create software applications that simplify our clients’ business processes by using the Mendix low code platform. It is our mission is to turn complex ideas into simple solutions for medium to corporate-sized businesses, in any industry.
 
-![From https://www.stoneworx.nl/](https://cdn.prod.website-files.com/66991b9fc069c88aec093fd1/66b242753e65840128c97ab9_imagehero-p-800.png)
-
-From https://www.stoneworx.nl/
+<img alt="From https://www.stoneworx.nl/o" src="https://cdn.prod.website-files.com/66991b9fc069c88aec093fd1/66b242753e65840128c97ab9_imagehero-p-800.png" width="65px"/>
 
 ### License
 
