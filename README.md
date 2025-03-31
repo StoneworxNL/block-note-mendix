@@ -58,8 +58,8 @@ From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we ca
 
 ## Demo project
 - [Mendix app running on the cloud](https://block-note-demo-sandbox.mxapps.io/index.html?profile=Responsive)
-- [Mendix demo module (.mpk)](https://github.com/joaodelopes/block-note-mendix/blob/main/demo_mpk/BlockNoteDemo.mpk)
-- [Mendix demo scss (.scss)](https://github.com/joaodelopes/block-note-mendix/blob/main/demo_mpk/demo.scss)
+- [Mendix demo module (.mpk)](https://github.com/joaodelopes/block-note-mendix/blob/main/demo/BlockNoteDemo.mpk)
+- [Mendix demo scss (.scss)](https://github.com/joaodelopes/block-note-mendix/blob/main/demo/demo.scss)
 
 ## Issues, suggestions and feature requests
 No known issues at the moment.
