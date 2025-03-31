@@ -46,6 +46,8 @@ From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we ca
 ### View-only
 ![Edit Mode](https://github.com/joaodelopes/block-note-mendix/blob/main/images/viewmodedemo.png)
 
+### Fully-resizable
+![Edit Mode](https://github.com/joaodelopes/block-note-mendix/blob/main/images/fullscreendemo.png)
 
 ## Usage
 1. Create a database entity to store the JSON configuration of the Block Note.
