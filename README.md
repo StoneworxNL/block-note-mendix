@@ -51,7 +51,7 @@ From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we ca
 1. Create a database entity to store the JSON configuration of the Block Note.
 2. Add a dataview to a page and fetch the aforementioned configuration.
 2. Inside the dataview, add the block-note widget.
-3. Set it as editable (Yes) or Read-only (No) and add a Save action. There's two different inputs for configurations, in case you want to load an initial configuration different than the attribute where you want to save it to.
+3. Set it as editable (Yes) or Read-only (No), set the theme (light or dark), and add a Save action. There's two different inputs for configurations, in case you want to load an initial configuration different than the attribute where you want to save it to.
 
 ![Usage in Mendix Studio Pro](https://github.com/joaodelopes/block-note-mendix/blob/main/images/studioproconfig.png)
 
@@ -64,128 +64,6 @@ From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we ca
 ## Issues, suggestions and feature requests
 No known issues at the moment.
 We are working in improving it and adding features to make this widget more flexible for different purposes. Feel free to suggest us new features and report issues.
-
-# Block Note
-
-[BlockNote](https://github.com/TypeCellOS/BlockNote) 📒 is an "open source Block-Based React rich text editor. Easily add a modern text editing experience to your app.". **All credits for the library go to [BlockNote](https://github.com/TypeCellOS/BlockNote)'s contributors.**
-
-The Block Note is used by [Docs](https://docs.numerique.gouv.fr/login/), a joint effort from the French 🇫🇷 and German 🇩🇪 governments, described as a way to "Collaborate and write in real time, without layout constraints". It is an alternative to Notion, Confluence, Google Docs, among others.
-
-## 🚀 Mendix Pluggable Widget
-
-Now, [BlockNote](https://github.com/TypeCellOS/BlockNote) is available as a Mendix Widget 🚀, allowing you to bring the minimalistic, yet powerful editor to your Mendix applications.
-
-### Features 😎
-
-From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we can see all of the features and components provided by the editor. Some of them are:
-
-*   Animations;
-
-*   Helpful Placeholders;
-
-*   Drag and Drop Blocks;
-
-*   Nesting / indentation with tab and shift+tab;
-
-*   Slash (/) menu;
-
-*   Format menu;
-
-*   Ctrl+Z, Ctrl+Y to save and undo, respectively;
-
-*   Editable and View-only modes;
-
-*   Resizable/responsive;
-
-*   Option to preload and save content (JSON);
-
-*   Customize css. The editor is wrapped by the css classes below:
-
-    *   .blocknote-mendix-wrapper
-    *   .blocknote-mx-dark (for dark mode only)
-
-## Examples
-
-### Budget
-
-|           |             |                       |
-| --------- | ----------- | --------------------- |
-| **Type**  | **January** | **February**          |
-| Income    | 1000 €      | 1000 €                |
-| Outcome   | 400 €       | 300 € *(in progress)* |
-| Remaining | 600 €       | *~ (in progress)*     |
-
-### Mendix Steps
-
-1.  Download Block Note widget from Mendix Marketplace 🖥️
-
-    1.  Test It
-    2.  Provide Feedback
-
-***💬 Feedback is highly appreciated!***
-
-1.  Integrate it in your application 🙌
-
-### Images (Sure thing, even gifs)
-
-![giphy.gif](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmE5OGtiMHRxM2Z3c240bm9jbDJzN3psYmd6czd2N2FjNm85anVoMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ztkgsOOma7wWp6cBlr/giphy.gif)
-
-### More About Block Note
-
-*   Check Github Block Note's documentation: <https://github.com/TypeCellOS/BlockNote>
-
-*   Check Block Note's Mendix Pluggable Widget
-
-    *   Mendix Marketplace
-
-        *   🤖
-
-    *   Check Available Mendix Demo
-
-### To Review Later (rollup.config.js file)
-
-*   [Useful Info](https://www.mendix.com/blog/build-widgets-in-mendix-with-react-part-4-arcgis-maps/)
-
-```javascript
-import json from '@rollup/plugin-json';
-
-export default args => {
-    const result = args.configDefaultConfig;
-    console.warn ('Custom Rollup')
-
-    return result.map((config) => {
-                config.output.inlineDynamicImports = true
-                console.warn ("Set dynamic imports")
-                const plugins = config.plugins || []
-                config.plugins = [
-                    ...plugins,
-                    json(),
-                ]  
-                return config;
-    });
-};
-```
-
-### Groceries' Checklist:
-
-*   [x] eggs;
-*   [ ] cheese;
-*   [x] milk;
-*   [ ] cottage cheese;
-*   [ ] vegetables;
-*   [ ] fruits
-
-### Stressed out? Here's a nature Video 🌳
-
-[](https://www.pexels.com/download/video/3571264/)
-
-### Search Emojis
-
-👾 Did you know you can add a /+emoji and then start writing something related to your emoji to search for it? Try it!
-
-### That file you don't want to forget 🚧
-
-[pres.numbers](https://docs.sheetjs.com/pres.numbers)
 
 ## About Stoneworx
 
