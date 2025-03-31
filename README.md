@@ -39,15 +39,13 @@ From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we ca
 
 ### Light
 ![Light Mode](https://github.com/joaodelopes/block-note-mendix/blob/main/images/lightmodedemo.png)
+![Light Mode (full-page)](https://github.com/joaodelopes/block-note-mendix/blob/main/images/fullscreendemo.png)
 
 ### Dark
 ![Dark Mode](https://github.com/joaodelopes/block-note-mendix/blob/main/images/darkmodedemo.png)
 
 ### View-only
-![Edit Mode](https://github.com/joaodelopes/block-note-mendix/blob/main/images/viewmodedemo.png)
-
-### Fully-resizable
-![Edit Mode](https://github.com/joaodelopes/block-note-mendix/blob/main/images/fullscreendemo.png)
+![View-only Mode](https://github.com/joaodelopes/block-note-mendix/blob/main/images/viewmodedemo.png)
 
 ## Usage
 1. Create a database entity to store the JSON configuration of the Block Note.
