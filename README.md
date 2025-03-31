@@ -65,6 +65,14 @@ From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we ca
 No known issues at the moment.
 We are working in improving it and adding features to make this widget more flexible for different purposes. Feel free to suggest us new features and report issues.
 
+## License
+
+BlockNote (the library upon this widget is based on) is licensed under the [MPL 2.0 license](https://fossa.com/blog/open-source-software-licenses-101-mozilla-public-license-2-0/), which allows you to use BlockNote in commercial (and closed-source) applications. If you make changes to the [BlockNote source files](https://github.com/TypeCellOS/BlockNote), you are expected to publish these changes, so that the rest of the community can benefit as well.
+
+⚠️ If you download this widget from the Mendix Marketplace and **change the Block Note's source code, not the widget's code itself**, you are expected to publish them [here](https://github.com/TypeCellOS/BlockNote), as per the license mentioned above.
+
+The widget itself is under MIT.
+
 ## About Stoneworx
 
 We started our company as friends and will always remain a club of people that likes doing business in a friendly matter. A group of entrepreneurial, smart and highly experienced Mendix professionals.  
@@ -72,11 +80,3 @@ We started our company as friends and will always remain a club of people that l
 On a daily basis, we create software applications that simplify our clients’ business processes by using the Mendix low code platform. It is our mission is to turn complex ideas into simple solutions for medium to corporate-sized businesses, in any industry.
 
 <img alt="From https://www.stoneworx.nl/o" src="https://cdn.prod.website-files.com/66991b9fc069c88aec093fd1/66b242753e65840128c97ab9_imagehero-p-800.png" width="50px"/>
-
-### License
-
-BlockNote (the library upon this widget is based on) is licensed under the [MPL 2.0 license](https://fossa.com/blog/open-source-software-licenses-101-mozilla-public-license-2-0/), which allows you to use BlockNote in commercial (and closed-source) applications. If you make changes to the [BlockNote source files](https://github.com/TypeCellOS/BlockNote), you are expected to publish these changes, so that the rest of the community can benefit as well.
-
-⚠️ If you download this widget from the Mendix Marketplace and **change the Block Note's source code, not the widget's code itself**, you are expected to publish them [here](https://github.com/TypeCellOS/BlockNote), as per the license mentioned above.
-
-The widget itself is under MIT.
