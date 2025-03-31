@@ -13,8 +13,8 @@ export interface BlockNoteContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    jsonAttribute: EditableValue<string>;
     jsonExpression: DynamicValue<string>;
+    jsonAttribute: EditableValue<string>;
     isEditable: boolean;
     saveAction?: ActionValue;
     themeEnum: ThemeEnumEnum;
@@ -31,8 +31,8 @@ export interface BlockNotePreviewProps {
     readOnly: boolean;
     renderMode: "design" | "xray" | "structure";
     translate: (text: string) => string;
-    jsonAttribute: string;
     jsonExpression: string;
+    jsonAttribute: string;
     isEditable: boolean;
     saveAction: {} | null;
     themeEnum: ThemeEnumEnum;
