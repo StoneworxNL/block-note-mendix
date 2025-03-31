@@ -23,7 +23,7 @@ From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we ca
 
 *   Format menu;
 
-*   Ctrl+Z, Ctrl+Y to save and undo, respectively;
+*   Ctrl+Z, Ctrl+Y to undo and redo, respectively;
 
 *   Editable and View-only modes;
 
