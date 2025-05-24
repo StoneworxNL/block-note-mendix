@@ -1,12 +1,12 @@
 import { ReactElement, createElement } from "react";
-import { MendixBlockNote } from "./components/MendixBlockNote";
+import { BlockNoteWrapper } from "./components/BlockNoteWrapper";
 
 import { BlockNoteContainerProps } from "../typings/BlockNoteProps";
 
 import "./ui/BlockNote.css";
 
 export function BlockNote({ jsonExpression, jsonAttribute, saveAction, isEditable, themeEnum }: BlockNoteContainerProps): ReactElement {
-    return <MendixBlockNote 
+    return <BlockNoteWrapper 
                 jsonExpression={jsonExpression}
                 jsonAttribute={jsonAttribute}
                 saveAction={saveAction}

@@ -1,7 +1,7 @@
 import { ReactElement, createElement, useEffect, useMemo, useState } from "react";
 import { BlockNoteView } from "@blocknote/mantine";
 import { PartialBlock, BlockNoteEditor } from "@blocknote/core";
-import { MendixBlockNoteSave } from "./MendixBlockNoteSave";
+import { BlockNoteSaveToolbar } from "./BlockNoteSaveToolbar";
 import "@blocknote/core/fonts/inter.css";
 import "@blocknote/mantine/style.css";
 
@@ -15,7 +15,7 @@ export interface BlockNoteProps {
     themeEnum: string;
 }
 
-export function MendixBlockNote({ jsonExpression, jsonAttribute, saveAction, isEditable, themeEnum }: BlockNoteProps): ReactElement {
+export function BlockNoteWrapper({ jsonExpression, jsonAttribute, saveAction, isEditable, themeEnum }: BlockNoteProps): ReactElement {
     const [initialContent, setInitialContent] = useState<PartialBlock[] | undefined | "loading">("loading");
 
     // Loads the previously stored editor contents.
@@ -46,7 +46,7 @@ export function MendixBlockNote({ jsonExpression, jsonAttribute, saveAction, isE
     return (
         <div className={'blocknote-mendix-wrapper' + (themeEnum === 'light' ? '' : ' blocknote-mx-dark')}>
             {isEditable && (
-                <MendixBlockNoteSave 
+                <BlockNoteSaveToolbar 
                     jsonAttribute={jsonAttribute}
                     saveAction={saveAction}
                     editor={editor}

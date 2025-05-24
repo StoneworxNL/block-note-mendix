@@ -8,7 +8,7 @@ export interface BlockNoteSaveProps {
     editor: BlockNoteEditor;
 }
 
-export function MendixBlockNoteSave({ jsonAttribute, saveAction, editor }: BlockNoteSaveProps): ReactElement {
+export function BlockNoteSaveToolbar({ jsonAttribute, saveAction, editor }: BlockNoteSaveProps): ReactElement {
     const handleSave = () => {
         if(jsonAttribute && jsonAttribute.status === 'available')   {
             if(saveAction && !saveAction.isExecuting)   {
