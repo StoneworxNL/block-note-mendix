@@ -17,14 +17,9 @@
     <icon />
     <properties>
         <propertyGroup caption="General">
-            <property key="jsonExpression" type="expression">
-                <caption>Initial Configuration</caption>
-                <description>Initial Configuration (JSON string).</description>
-                <returnType assignableTo="jsonAttribute" />
-            </property>
             <property key="jsonAttribute" type="attribute">
-                <caption>JSON Configuration (to save)</caption>
-                <description>Configuration JSON string. Used to save configuration in the database.</description>
+                <caption>JSON Configuration</caption>
+                <description>Configuration JSON string. Used to load initial configuration and save configuration in the database.</description>
                 <attributeTypes>
                     <attributeType name="String" />
                 </attributeTypes>

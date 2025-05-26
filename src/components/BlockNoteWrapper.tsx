@@ -5,17 +5,16 @@ import { BlockNoteSaveToolbar } from "./BlockNoteSaveToolbar";
 import "@blocknote/core/fonts/inter.css";
 import "@blocknote/mantine/style.css";
 
-import { DynamicValue, ActionValue, EditableValue } from "mendix";
+import { ActionValue, EditableValue } from "mendix";
 
 export interface BlockNoteProps {
-    jsonExpression: DynamicValue<string>;
     jsonAttribute: EditableValue<string>;
     saveAction?: ActionValue;
     isEditable: boolean;
     themeEnum: string;
 }
 
-export function BlockNoteWrapper({ jsonExpression, jsonAttribute, saveAction, isEditable, themeEnum }: BlockNoteProps): ReactElement {
+export function BlockNoteWrapper({ jsonAttribute, saveAction, isEditable, themeEnum }: BlockNoteProps): ReactElement {
     const defaultContent = '[{"type": "paragraph","props": {"textColor": "default","backgroundColor": "default","textAlignment": "left"},"content": [],"children": []}]';
 
     // Creates a new editor instance.
@@ -23,15 +22,15 @@ export function BlockNoteWrapper({ jsonExpression, jsonAttribute, saveAction, is
     // can delay the creation of the editor until the initial content is loaded.
     const editor = useMemo(() => {
         
-        if (!jsonExpression || jsonExpression.status !== "available")
+        if (!jsonAttribute || jsonAttribute.status !== "available")
             return undefined;
     
-        const content = jsonExpression.value
-            ? JSON.parse(jsonExpression.value.toString())
+        const content = jsonAttribute.value
+            ? JSON.parse(jsonAttribute.value.toString())
             : JSON.parse(defaultContent);
     
         return BlockNoteEditor.create({ initialContent: content });
-    }, [jsonExpression]);
+    }, [jsonAttribute]);
 
 
     if (editor === undefined) {

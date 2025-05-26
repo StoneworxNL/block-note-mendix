@@ -4,7 +4,7 @@
  * @author Mendix Widgets Framework Team
  */
 import { CSSProperties } from "react";
-import { ActionValue, DynamicValue, EditableValue } from "mendix";
+import { ActionValue, EditableValue } from "mendix";
 
 export type ThemeEnumEnum = "light" | "green";
 
@@ -13,7 +13,6 @@ export interface BlockNoteContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    jsonExpression: DynamicValue<string>;
     jsonAttribute: EditableValue<string>;
     isEditable: boolean;
     saveAction?: ActionValue;
@@ -31,7 +30,6 @@ export interface BlockNotePreviewProps {
     readOnly: boolean;
     renderMode: "design" | "xray" | "structure";
     translate: (text: string) => string;
-    jsonExpression: string;
     jsonAttribute: string;
     isEditable: boolean;
     saveAction: {} | null;
