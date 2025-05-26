@@ -1,6 +1,6 @@
-import { ReactElement, createElement, useEffect, useMemo, useState } from "react";
+import { ReactElement, createElement, useMemo } from "react";
 import { BlockNoteView } from "@blocknote/mantine";
-import { PartialBlock, BlockNoteEditor } from "@blocknote/core";
+import { BlockNoteEditor } from "@blocknote/core";
 import { BlockNoteSaveToolbar } from "./BlockNoteSaveToolbar";
 import "@blocknote/core/fonts/inter.css";
 import "@blocknote/mantine/style.css";
@@ -16,27 +16,23 @@ export interface BlockNoteProps {
 }
 
 export function BlockNoteWrapper({ jsonExpression, jsonAttribute, saveAction, isEditable, themeEnum }: BlockNoteProps): ReactElement {
-    const [initialContent, setInitialContent] = useState<PartialBlock[] | undefined | "loading">("loading");
-
-    // Loads the previously stored editor contents.
-    useEffect(() => {
-        if (jsonExpression && jsonExpression.status === "available") {
-            if (jsonExpression.value)
-                setInitialContent(JSON.parse(jsonExpression.value.toString()) as PartialBlock[]);
-            else
-                setInitialContent(JSON.parse('[{"type": "paragraph","props": {"textColor": "default","backgroundColor": "default","textAlignment": "left"},"content": [],"children": []}]') as PartialBlock[]);
-        }
-    }, [jsonExpression]);
+    const defaultContent = '[{"type": "paragraph","props": {"textColor": "default","backgroundColor": "default","textAlignment": "left"},"content": [],"children": []}]';
 
     // Creates a new editor instance.
     // We use useMemo + createBlockNoteEditor instead of useCreateBlockNote so we
     // can delay the creation of the editor until the initial content is loaded.
     const editor = useMemo(() => {
-        if (initialContent === "loading") {
+        
+        if (!jsonExpression || jsonExpression.status !== "available")
             return undefined;
-        }
-        return BlockNoteEditor.create({ initialContent });
-    }, [initialContent]);
+    
+        const content = jsonExpression.value
+            ? JSON.parse(jsonExpression.value.toString())
+            : JSON.parse(defaultContent);
+    
+        return BlockNoteEditor.create({ initialContent: content });
+    }, [jsonExpression]);
+
 
     if (editor === undefined) {
         return <div>Loading content...</div>;
