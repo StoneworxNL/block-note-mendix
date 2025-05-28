@@ -1,11 +1,10 @@
-import { ReactElement, createElement, useMemo } from "react";
+import { ReactElement, createElement, useEffect, useState, useMemo } from "react";
 import { BlockNoteView } from "@blocknote/mantine";
-import { BlockNoteEditor } from "@blocknote/core";
+import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
 import { BlockNoteSaveToolbar } from "./BlockNoteSaveToolbar";
+import { ActionValue, EditableValue } from "mendix";
 import "@blocknote/core/fonts/inter.css";
 import "@blocknote/mantine/style.css";
-
-import { ActionValue, EditableValue } from "mendix";
 
 export interface BlockNoteProps {
     jsonAttribute: EditableValue<string>;
@@ -15,23 +14,26 @@ export interface BlockNoteProps {
 }
 
 export function BlockNoteWrapper({ jsonAttribute, saveAction, isEditable, themeEnum }: BlockNoteProps): ReactElement {
+    
     const defaultContent = '[{"type": "paragraph","props": {"textColor": "default","backgroundColor": "default","textAlignment": "left"},"content": [],"children": []}]';
+    const [initialContent, setInitialContent] = useState<PartialBlock[] | undefined | "loading">("loading");
+
+    // Loads stored editor contents (https://www.blocknotejs.org/examples/backend/saving-loading)
+    useEffect(() => {
+        setInitialContent((jsonAttribute.value
+            ? JSON.parse(jsonAttribute.value.toString())
+            : JSON.parse(defaultContent)) as PartialBlock[]);
+    }, [jsonAttribute]);
 
     // Creates a new editor instance.
     // We use useMemo + createBlockNoteEditor instead of useCreateBlockNote so we
     // can delay the creation of the editor until the initial content is loaded.
     const editor = useMemo(() => {
-        
-        if (!jsonAttribute || jsonAttribute.status !== "available")
+        if (initialContent === "loading")
             return undefined;
     
-        const content = jsonAttribute.value
-            ? JSON.parse(jsonAttribute.value.toString())
-            : JSON.parse(defaultContent);
-    
-        return BlockNoteEditor.create({ initialContent: content });
-    }, [jsonAttribute]);
-
+        return BlockNoteEditor.create({ initialContent });
+    }, [initialContent]);
 
     if (editor === undefined) {
         return <div>Loading content...</div>;

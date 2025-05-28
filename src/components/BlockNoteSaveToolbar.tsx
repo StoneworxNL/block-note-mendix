@@ -9,6 +9,7 @@ export interface BlockNoteSaveProps {
 }
 
 export function BlockNoteSaveToolbar({ jsonAttribute, saveAction, editor }: BlockNoteSaveProps): ReactElement {
+    
     const handleSave = () => {
         if(jsonAttribute && jsonAttribute.status === 'available')   {
             if(saveAction && !saveAction.isExecuting)   {

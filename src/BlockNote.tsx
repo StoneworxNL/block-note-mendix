@@ -1,6 +1,5 @@
 import { ReactElement, createElement } from "react";
 import { BlockNoteWrapper } from "./components/BlockNoteWrapper";
-
 import { BlockNoteContainerProps } from "../typings/BlockNoteProps";
 
 import "./ui/BlockNote.css";

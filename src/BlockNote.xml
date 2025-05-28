@@ -30,14 +30,14 @@
             </property>
             <property key="saveAction" type="action">
                 <caption>Save Action</caption>
-                <description>Action to be performed when button is clicked (if auto-save is false) or onChange (if auto-save is true).</description>
+                <description>Action to be performed when button is clicked.</description>
             </property>
             <property key="themeEnum" type="enumeration" defaultValue="light">
                 <caption>Theme</caption>
                 <description />
                 <enumerationValues>
                     <enumerationValue key="light">Light</enumerationValue>
-                    <enumerationValue key="green">Dark</enumerationValue>
+                    <enumerationValue key="dark">Dark</enumerationValue>
                 </enumerationValues>
             </property>
         </propertyGroup>
