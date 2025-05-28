@@ -20,9 +20,11 @@ export function BlockNoteWrapper({ jsonAttribute, saveAction, isEditable, themeE
 
     // Loads stored editor contents (https://www.blocknotejs.org/examples/backend/saving-loading)
     useEffect(() => {
-        setInitialContent((jsonAttribute.value
-            ? JSON.parse(jsonAttribute.value.toString())
-            : JSON.parse(defaultContent)) as PartialBlock[]);
+        if (jsonAttribute.status === "available") {
+            setInitialContent((jsonAttribute.value
+                ? JSON.parse(jsonAttribute.value.toString())
+                : JSON.parse(defaultContent)) as PartialBlock[]);
+        }
     }, [jsonAttribute]);
 
     // Creates a new editor instance.
@@ -41,7 +43,7 @@ export function BlockNoteWrapper({ jsonAttribute, saveAction, isEditable, themeE
 
     // Renders the editor instance.
     return (
-        <div className={'blocknote-mendix-wrapper' + (themeEnum === 'light' ? '' : ' blocknote-mx-dark')}>
+        <div className={'blocknote-mendix-wrapper blocknote-mx-' + themeEnum}>
             {isEditable && (
                 <BlockNoteSaveToolbar 
                     jsonAttribute={jsonAttribute}

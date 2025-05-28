@@ -11,21 +11,19 @@ export interface BlockNoteSaveProps {
 export function BlockNoteSaveToolbar({ jsonAttribute, saveAction, editor }: BlockNoteSaveProps): ReactElement {
     
     const handleSave = () => {
-        if(jsonAttribute && jsonAttribute.status === 'available')   {
-            if(saveAction && !saveAction.isExecuting)   {
-                if(saveAction.canExecute)   {
-                    jsonAttribute.setValue(
-                        JSON.stringify(editor.document, null, 2)
-                    );
-                    saveAction.execute();
-                }
-                else {
-                    console.log('Save not possible as Save action cannot be executed.');
-                }
+        if(saveAction && !saveAction.isExecuting)   {
+            if(saveAction.canExecute)   {
+                jsonAttribute.setValue(
+                    JSON.stringify(editor.document, null, 2)
+                );
+                saveAction.execute();
+            }
+            else {
+                console.log('Save not possible as Save action cannot be executed.');
             }
         }
         else {
-            console.log('Save not possible as JSON attribute is not available.');
+            console.log('Save not possible as Save action is either unavailable or executing.');
         }
     };
 

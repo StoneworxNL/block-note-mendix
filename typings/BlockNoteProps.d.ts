@@ -6,7 +6,7 @@
 import { CSSProperties } from "react";
 import { ActionValue, EditableValue } from "mendix";
 
-export type ThemeEnumEnum = "light" | "green";
+export type ThemeEnumEnum = "light" | "dark";
 
 export interface BlockNoteContainerProps {
     name: string;
