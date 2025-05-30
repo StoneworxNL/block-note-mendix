@@ -31,7 +31,7 @@ From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we ca
 
 *   Option to preload and save content (JSON);
 
-*   Customize css. The editor is wrapped by the css classes below:
+*   Customize scss. The editor is wrapped by the css classes below:
 
     *   .blocknote-mendix-wrapper
     *   .blocknote-mx-dark (for dark mode only)
