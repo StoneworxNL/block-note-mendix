@@ -1,26 +1,3 @@
-@import "custom-variables";
-
-.layout-atlas .region-topbar {
-    // background-color: #3b3b3b;
-    background-color: #ffffff;
-    
-    .btn-primary, .mx-navbar ul.nav > li.mx-navbar-item > a, .mx-navbar .mx-navbar-item > active    {
-        color: #3b3b3b;
-        background-color: #ffffff;
-        &:hover {
-            color: #23b5d8;
-        }
-        &:active {
-            color: #23b5d8;
-            background-color: #3b3b3b;
-        }
-    }
-    // box-shadow: 0 4px 2px -2px rgb(236, 236, 236);
-    // .bn-container {
-    //     box-shadow: 2px 4px 2px 2px rgb(236, 236, 236);
-    // }
-}
-
 .blocknote-mx-dark .blocknote-save-btn  {
     .btn, .mx-button {
         background-color: #23b5d8;
@@ -44,5 +21,8 @@
     input[type="checkbox"]:checked::before {
         border-color: #2095b2;
         background-color: #2095b2;
+    }
+    .bn-block .bn-block-content[data-content-type="codeBlock"] pre {
+        color: #ffffff;
     }
 }
