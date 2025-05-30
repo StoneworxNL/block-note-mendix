@@ -51,7 +51,7 @@ From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we ca
 1. Create a database entity to store the JSON configuration of the Block Note.
 2. Add a dataview to a page and fetch the aforementioned configuration.
 2. Inside the dataview, add the block-note widget.
-3. Set it as editable (Yes) or Read-only (No), set the theme (light or dark), and add a Save action. There's two different inputs for configurations, in case you want to load an initial configuration different than the attribute where you want to save it to.
+3. Set it as editable (Yes) or Read-only (No), set the theme (light or dark), and add a Save action. There's also an attribute configuration, to load an initial configuration and save it afterwards.
 
 ![Usage in Mendix Studio Pro](https://github.com/joaodelopes/block-note-mendix/blob/main/images/studioproconfig.png)
 
@@ -72,11 +72,3 @@ BlockNote (the library upon this widget is based on) is licensed under the [MPL 
 ⚠️ If you download this widget from the Mendix Marketplace and **change the Block Note's source code, not the widget's code itself**, you are expected to publish them [here](https://github.com/TypeCellOS/BlockNote), as per the license mentioned above.
 
 The widget itself is under MIT.
-
-## About Stoneworx
-
-<img alt="From https://www.stoneworx.nl/o" src="https://cdn.prod.website-files.com/66991b9fc069c88aec093fd1/66b242753e65840128c97ab9_imagehero-p-800.png" width="50px"/>
-
-We started our company as friends and will always remain a club of people that likes doing business in a friendly matter. A group of entrepreneurial, smart and highly experienced Mendix professionals.  
-
-On a daily basis, we create software applications that simplify our clients’ business processes by using the Mendix low code platform. It is our mission is to turn complex ideas into simple solutions for medium to corporate-sized businesses, in any industry.
