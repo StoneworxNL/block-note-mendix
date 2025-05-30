@@ -17,6 +17,7 @@
     <icon />
     <properties>
         <propertyGroup caption="General">
+
             <property key="jsonAttribute" type="attribute">
                 <caption>JSON Configuration</caption>
                 <description>Configuration JSON string. Used to load initial configuration and save configuration in the database.</description>
@@ -24,14 +25,17 @@
                     <attributeType name="String" />
                 </attributeTypes>
             </property>
+
             <property key="isEditable" type="boolean" defaultValue="true">
                 <caption>Editable</caption>
                 <description />
             </property>
+
             <property key="saveAction" type="action">
                 <caption>Save Action</caption>
                 <description>Action to be performed when button is clicked.</description>
             </property>
+
             <property key="themeEnum" type="enumeration" defaultValue="light">
                 <caption>Theme</caption>
                 <description />
@@ -40,6 +44,7 @@
                     <enumerationValue key="dark">Dark</enumerationValue>
                 </enumerationValues>
             </property>
+            
         </propertyGroup>
     </properties>
 </widget>
