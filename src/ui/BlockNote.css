@@ -17,11 +17,6 @@
     color: #cfcfcf;
 }
 
-.bn-block .bn-block-content[data-content-type="codeBlock"] pre {
-    background-color: #333;
-    border-color: #333;
-}
-
 .bn-block .bn-block-content[data-content-type="checkListItem"] div div {
     padding-right: 8px;
     padding-top: 6px;

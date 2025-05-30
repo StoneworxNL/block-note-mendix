@@ -62,7 +62,7 @@ From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we ca
 - [Mendix demo scss (.scss)](https://github.com/joaodelopes/block-note-mendix/blob/main/demo/demo.scss)
 
 ## Issues, suggestions and feature requests
-No known issues at the moment.
+Minor issue with the Code Block, where the code is all coloured black, so there's no colour to distinguish different parts of a code snippet.
 We are working in improving it and adding features to make this widget more flexible for different purposes. Feel free to suggest us new features and report issues.
 
 ## License
