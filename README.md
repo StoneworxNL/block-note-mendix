@@ -5,7 +5,7 @@ The Block Note is used by [Docs](https://docs.numerique.gouv.fr/login/), a joint
 
 Now, [BlockNote](https://github.com/TypeCellOS/BlockNote) is available as a Mendix Widget 🚀, allowing you to bring the minimalistic, yet powerful editor to your Mendix Web applications.
 
-<img alt="Mendix Pluggable Widget Block Note Logo" src="https://github.com/joaodelopes/block-note-mendix/blob/main/images/logo.jpeg" width="65px"/>
+<img alt="Mendix Pluggable Widget Block Note Logo" src="https://github.com/StoneworxNL/block-note-mendix/blob/main/images/logo.jpeg" width="65px"/>
 
 ## Features
 Mendix pluggable widget where you can simply add an editor to your web application.
@@ -38,14 +38,14 @@ From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we ca
 
 
 ### Light
-![Light Mode](https://github.com/joaodelopes/block-note-mendix/blob/main/images/lightmodedemo.png)
-![Light Mode (full-page)](https://github.com/joaodelopes/block-note-mendix/blob/main/images/fullscreendemo.png)
+![Light Mode](https://github.com/StoneworxNL/block-note-mendix/blob/main/images/lightmodedemo.png)
+![Light Mode (full-page)](https://github.com/StoneworxNL/block-note-mendix/blob/main/images/fullscreendemo.png)
 
 ### Dark
-![Dark Mode](https://github.com/joaodelopes/block-note-mendix/blob/main/images/darkmodedemo.png)
+![Dark Mode](https://github.com/StoneworxNL/block-note-mendix/blob/main/images/darkmodedemo.png)
 
 ### View-only
-![View-only Mode](https://github.com/joaodelopes/block-note-mendix/blob/main/images/viewmodedemo.png)
+![View-only Mode](https://github.com/StoneworxNL/block-note-mendix/blob/main/images/viewmodedemo.png)
 
 ## Usage
 1. Create a database entity to store the JSON configuration of the Block Note.
@@ -53,13 +53,13 @@ From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we ca
 2. Inside the dataview, add the block-note widget.
 3. Set it as editable (Yes) or Read-only (No), set the theme (light or dark), and add a Save action. There's also an attribute configuration, to load an initial configuration and save it afterwards.
 
-![Usage in Mendix Studio Pro](https://github.com/joaodelopes/block-note-mendix/blob/main/images/studioproconfig.png)
+![Usage in Mendix Studio Pro](https://github.com/StoneworxNL/block-note-mendix/blob/main/images/studioproconfig.png)
 
 
 ## Demo project
 - [Mendix app running on the cloud](https://block-note-demo-sandbox.mxapps.io/index.html?profile=Responsive)
-- [Mendix demo module (.mpk)](https://github.com/joaodelopes/block-note-mendix/blob/main/demo/BlockNoteDemo.mpk)
-- [Mendix demo scss (.scss)](https://github.com/joaodelopes/block-note-mendix/blob/main/demo/demo.scss)
+- [Mendix demo module (.mpk)](https://github.com/StoneworxNL/block-note-mendix/blob/main/demo/BlockNoteDemo.mpk)
+- [Mendix demo scss (.scss)](https://github.com/StoneworxNL/block-note-mendix/blob/main/demo/demo.scss)
 
 ## Issues, suggestions and feature requests
 Minor issue with the Code Block, where the code is all coloured black, so there's no colour to distinguish different parts of a code snippet.
