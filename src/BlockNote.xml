@@ -35,19 +35,51 @@
                 <attributeType name="String" />
             </attributeTypes>
         </property>
-        <property key="contentItemAssociation" type="association" selectableObjects="blocksDataSource" dataSource="contentItemDataSource">
+        <property key="contentItemDataSource" type="datasource" isList="true">
             <caption>Content Items</caption>
-            <description>Association to the content items of the block (e.g. text, url, etc.).</description>
+            <description/>
+        </property>
+        <property key="contentItemAssociation" type="association" selectableObjects="blocksDataSource" dataSource="contentItemDataSource">
+            <caption>Content Items Association to Block</caption>
+            <description/>
             <associationTypes>
-                <associationType name="ReferenceSet" />
                 <associationType name="Reference" />
             </associationTypes>
         </property> 
-        <property key="contentItemDataSource" type="datasource" isList="true">
-    <caption>Content Items</caption>
-    <description/>
-</property>
-
+        <property key="contentItemType" type="attribute" dataSource="contentItemDataSource">
+            <caption>Content Item Type</caption>
+            <description>Attribute that contains the type of the content item (e.g. text, bold, italic, link, etc.).</description>
+            <attributeTypes>
+                <attributeType name="String" />
+            </attributeTypes>
+        </property>
+        <property key="contentItemText" type="attribute" dataSource="contentItemDataSource">
+            <caption>Content Item Text</caption>
+            <description>Attribute that contains the text of the content item.</description>
+            <attributeTypes>
+                <attributeType name="String" />
+            </attributeTypes>
+        </property>
+    </propertyGroup>
+    <propertyGroup caption="Styles">
+        <property key="stylesDataSource" type="datasource" isList="true">
+            <caption>Styles</caption>
+            <description/>
+        </property>
+        <property key="stylesAssociation" type="association" selectableObjects="contentItemDataSource" dataSource="stylesDataSource">
+            <caption>Styles Association to Content Item</caption>
+            <description/>
+            <associationTypes>
+                <associationType name="Reference" />
+            </associationTypes>
+        </property>
+        <property key="isBold" type="attribute" dataSource="stylesDataSource">
+            <caption>Bold</caption>
+            <description>Attribute that indicates whether the style is bold.</description>
+            <attributeTypes>
+                <attributeType name="Boolean" />
+            </attributeTypes>
+        </property>
     </propertyGroup>
     <propertyGroup caption="General">
 
