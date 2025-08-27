@@ -4,7 +4,7 @@
  * @author Mendix Widgets Framework Team
  */
 import { CSSProperties } from "react";
-import { ActionValue, EditableValue } from "mendix";
+import { ActionValue, EditableValue, ListValue, ListAttributeValue, ListReferenceValue, ListReferenceSetValue } from "mendix";
 
 export type ThemeEnumEnum = "light" | "dark";
 
@@ -13,6 +13,11 @@ export interface BlockNoteContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    blocksDataSource: ListValue;
+    blockId: ListAttributeValue<string>;
+    blockType: ListAttributeValue<string>;
+    contentItemAssociation: ListReferenceSetValue | ListReferenceValue;
+    contentItemDataSource: ListValue;
     jsonAttribute: EditableValue<string>;
     isEditable: boolean;
     saveAction?: ActionValue;
@@ -30,6 +35,11 @@ export interface BlockNotePreviewProps {
     readOnly: boolean;
     renderMode: "design" | "xray" | "structure";
     translate: (text: string) => string;
+    blocksDataSource: {} | { caption: string } | { type: string } | null;
+    blockId: string;
+    blockType: string;
+    contentItemAssociation: string;
+    contentItemDataSource: {} | { caption: string } | { type: string } | null;
     jsonAttribute: string;
     isEditable: boolean;
     saveAction: {} | null;

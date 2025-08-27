@@ -16,7 +16,40 @@
     </description>
     <icon />
     <properties>
-        <propertyGroup caption="General">
+    <propertyGroup caption="Blocks">
+        <property key="blocksDataSource" type="datasource" isList="true">
+            <caption>Blocks</caption>
+            <description />
+        </property>
+        <property key="blockId" type="attribute" dataSource="blocksDataSource">
+            <caption>Block ID</caption>
+            <description>Attribute that contains the unique ID of the block.</description>
+            <attributeTypes>
+                <attributeType name="String" />
+            </attributeTypes>
+        </property>
+        <property key="blockType" type="attribute" dataSource="blocksDataSource">
+            <caption>Block Type</caption>
+            <description>Attribute that contains the type of the block (e.g. paragraph, heading, image, etc.).</description>
+            <attributeTypes>
+                <attributeType name="String" />
+            </attributeTypes>
+        </property>
+        <property key="contentItemAssociation" type="association" selectableObjects="blocksDataSource" dataSource="contentItemDataSource">
+            <caption>Content Items</caption>
+            <description>Association to the content items of the block (e.g. text, url, etc.).</description>
+            <associationTypes>
+                <associationType name="ReferenceSet" />
+                <associationType name="Reference" />
+            </associationTypes>
+        </property> 
+        <property key="contentItemDataSource" type="datasource" isList="true">
+    <caption>Content Items</caption>
+    <description/>
+</property>
+
+    </propertyGroup>
+    <propertyGroup caption="General">
 
             <property key="jsonAttribute" type="attribute">
                 <caption>JSON Configuration</caption>
