@@ -2,7 +2,7 @@
   "name": "blocknote",
   "type": "module",
   "widgetName": "BlockNote",
-  "version": "2.1.2",
+  "version": "2.1.0",
   "description": "Block-Based React rich text editor. Easily add a modern text editing experience to your app. Based on https://www.npmjs.com/package/@blocknote/core.",
   "copyright": "JL 2025",
   "author": "João Lopes",
