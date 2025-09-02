@@ -30,7 +30,7 @@ function flattenContent(content: contentFromDocument[], contentId: string | null
     for (const item of content) {
         const { content: children, ...rest } = item;
         const id = generateId();
-        result.push({ ...rest, id, parentContent: contentId });
+        result.push({id, ...rest, parentContent: contentId });
     
         if (Array.isArray(children) && children.length > 0) {
           flattenContent(children, id, result);
