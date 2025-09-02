@@ -57,9 +57,9 @@ export function flattenBlocks(blocks: blockFromDocument[], parentId: string | nu
 
 /*****************************************  Unflatten  */
 
-export function unflattenBlocks(flatBlocks: flatBlock[]): Block[] {
-  const blockMap = new Map<string, Block>();
-  const rootBlocks: Block[] = [];
+export function unflattenBlocks(flatBlocks: flatBlock[]): blockFromDocument[] {
+  const blockMap = new Map<string, blockFromDocument>();
+  const rootBlocks: blockFromDocument[] = [];
 
   // First, create all blocks without children
   for (const flat of flatBlocks) {
@@ -90,9 +90,9 @@ export function unflattenBlocks(flatBlocks: flatBlock[]): Block[] {
   return rootBlocks;
 }
 
-function unflattenContent(flatContent: FlatContentItem[]): ContentItem[] {
-  const contentMap = new Map<string, ContentItem>();
-  const rootContent: ContentItem[] = [];
+function unflattenContent(flatContent: flatContent[]): contentFromDocument[] {
+  const contentMap = new Map<string, contentFromDocument>();
+  const rootContent: contentFromDocument[] = [];
 
   // Create all content items
   for (const flat of flatContent) {

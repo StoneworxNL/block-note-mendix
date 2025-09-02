@@ -21,7 +21,7 @@ export function BlockNoteWrapper({ jsonPayload, saveAction, isEditable, themeEnu
     // Loads stored editor contents (https://www.blocknotejs.org/examples/backend/saving-loading)
     
     useEffect(() => {
-        if (jsonPayload && jsonPayload.status === "available") {
+        if (jsonPayload && jsonPayload.status === "available" && initialContent === "loading") {
             setInitialContent((jsonPayload.value
                 ? JSON.parse(jsonPayload.value.toString())
                 : JSON.parse(defaultContent)) as PartialBlock[]);
