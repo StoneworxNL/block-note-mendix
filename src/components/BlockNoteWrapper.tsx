@@ -7,13 +7,13 @@ import "@blocknote/core/fonts/inter.css";
 import "@blocknote/mantine/style.css";
 
 export interface BlockNoteProps {
-    jsonAttribute: EditableValue<string>;
+    jsonPayload: EditableValue<string>;
     saveAction?: ActionValue;
     isEditable: boolean;
     themeEnum: string;
 }
 
-export function BlockNoteWrapper({ jsonAttribute, saveAction, isEditable, themeEnum }: BlockNoteProps): ReactElement {
+export function BlockNoteWrapper({ jsonPayload, saveAction, isEditable, themeEnum }: BlockNoteProps): ReactElement {
     
     const defaultContent = '[{"type": "paragraph","props": {"textColor": "default","backgroundColor": "default","textAlignment": "left"},"content": [],"children": []}]';
     const [initialContent, setInitialContent] = useState<PartialBlock[] | undefined | "loading">("loading");
@@ -21,12 +21,12 @@ export function BlockNoteWrapper({ jsonAttribute, saveAction, isEditable, themeE
     // Loads stored editor contents (https://www.blocknotejs.org/examples/backend/saving-loading)
     
     useEffect(() => {
-        if (jsonAttribute && jsonAttribute.status === "available") {
-            setInitialContent((jsonAttribute.value
-                ? JSON.parse(jsonAttribute.value.toString())
+        if (jsonPayload && jsonPayload.status === "available") {
+            setInitialContent((jsonPayload.value
+                ? JSON.parse(jsonPayload.value.toString())
                 : JSON.parse(defaultContent)) as PartialBlock[]);
         }
-    }, [jsonAttribute]);
+    }, [jsonPayload]);
 
     // Creates a new editor instance.
     // We use useMemo + createBlockNoteEditor instead of useCreateBlockNote so we
@@ -49,7 +49,7 @@ export function BlockNoteWrapper({ jsonAttribute, saveAction, isEditable, themeE
         <div className={'blocknote-mendix-wrapper blocknote-mx-' + themeEnum}>
             {isEditable && (
                 <BlockNoteSaveToolbar 
-                    jsonAttribute={jsonAttribute}
+                    jsonPayload={jsonPayload}
                     saveAction={saveAction}
                     editor={editor}
                 />

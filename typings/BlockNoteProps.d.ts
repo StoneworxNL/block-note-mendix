@@ -23,7 +23,7 @@ export interface BlockNoteContainerProps {
     stylesDataSource: ListValue;
     stylesAssociation: ListReferenceValue;
     isBold: ListAttributeValue<boolean>;
-    jsonAttribute: EditableValue<string>;
+    jsonPayload: EditableValue<string>;
     isEditable: boolean;
     saveAction?: ActionValue;
     themeEnum: ThemeEnumEnum;
@@ -50,7 +50,7 @@ export interface BlockNotePreviewProps {
     stylesDataSource: {} | { caption: string } | { type: string } | null;
     stylesAssociation: string;
     isBold: string;
-    jsonAttribute: string;
+    jsonPayload: string;
     isEditable: boolean;
     saveAction: {} | null;
     themeEnum: ThemeEnumEnum;

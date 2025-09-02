@@ -83,9 +83,9 @@
     </propertyGroup>
     <propertyGroup caption="General">
 
-            <property key="jsonAttribute" type="attribute">
-                <caption>JSON Configuration</caption>
-                <description>Configuration JSON string. Used to load initial configuration and save configuration in the database.</description>
+            <property key="jsonPayload" type="attribute">
+                <caption>JSON Payload</caption>
+                <description>JSON string to save configuration through import mapping.</description>
                 <attributeTypes>
                     <attributeType name="String" />
                 </attributeTypes>

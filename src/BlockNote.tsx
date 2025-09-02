@@ -4,9 +4,9 @@ import { BlockNoteContainerProps } from "../typings/BlockNoteProps";
 
 import "./ui/BlockNote.css";
 
-export function BlockNote({ jsonAttribute, saveAction, isEditable, themeEnum }: BlockNoteContainerProps): ReactElement {
+export function BlockNote({ jsonPayload, saveAction, isEditable, themeEnum }: BlockNoteContainerProps): ReactElement {
     return <BlockNoteWrapper 
-                jsonAttribute={jsonAttribute}
+    jsonPayload={jsonPayload}
                 saveAction={saveAction}
                 isEditable={isEditable}
                 themeEnum={themeEnum}
