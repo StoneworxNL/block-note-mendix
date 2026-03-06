@@ -2,18 +2,25 @@ import { ReactElement, createElement, useEffect, useState, useMemo } from "react
 import { BlockNoteView } from "@blocknote/mantine";
 import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
 import { BlockNoteSaveToolbar } from "./BlockNoteSaveToolbar";
-import { ActionValue, EditableValue } from "mendix";
 import "@blocknote/core/fonts/inter.css";
 import "@blocknote/mantine/style.css";
+import { ActionValue, EditableValue, ListValue, ListAttributeValue, ListReferenceValue } from "mendix";
 
 export interface BlockNoteProps {
     jsonPayload: EditableValue<string>;
     saveAction?: ActionValue;
     isEditable: boolean;
     themeEnum: string;
+    // Blocks data source props
+    blocksDataSource: ListValue;
+    blockId: ListAttributeValue<string>;
+    blockType: ListAttributeValue<string>;
+    // Content item data source props
+    contentItemDataSource: ListValue;
+    contentItemAssociation: ListReferenceValue;
 }
 
-export function BlockNoteWrapper({ jsonPayload, saveAction, isEditable, themeEnum }: BlockNoteProps): ReactElement {
+export function BlockNoteWrapper({ jsonPayload, saveAction, isEditable, themeEnum, blocksDataSource, blockId, blockType, contentItemDataSource, contentItemAssociation }: BlockNoteProps): ReactElement {
     
     const defaultContent = '[{"type": "paragraph","props": {"textColor": "default","backgroundColor": "default","textAlignment": "left"},"content": [],"children": []}]';
     const [initialContent, setInitialContent] = useState<PartialBlock[] | undefined | "loading">("loading");
@@ -21,12 +28,22 @@ export function BlockNoteWrapper({ jsonPayload, saveAction, isEditable, themeEnu
     // Loads stored editor contents (https://www.blocknotejs.org/examples/backend/saving-loading)
     
     useEffect(() => {
+        console.log(blockType)
+        blocksDataSource?.items?.map((item) => ({
+            id: blockId.get(item).value,
+            type: blockType.get(item).value,
+            content: contentItemDataSource?.items?.map((contentItem) => ({
+                id: contentItem
+            })) ,
+            content_association: contentItemAssociation.get(item)
+        }));
+
         if (jsonPayload && jsonPayload.status === "available" && initialContent === "loading") {
             setInitialContent((jsonPayload.value
                 ? JSON.parse(jsonPayload.value.toString())
                 : JSON.parse(defaultContent)) as PartialBlock[]);
         }
-    }, [jsonPayload]);
+    }, [blocksDataSource]);
 
     // Creates a new editor instance.
     // We use useMemo + createBlockNoteEditor instead of useCreateBlockNote so we

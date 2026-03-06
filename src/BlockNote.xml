@@ -39,7 +39,7 @@
             <caption>Content Items</caption>
             <description/>
         </property>
-        <property key="contentItemAssociation" type="association" selectableObjects="blocksDataSource" dataSource="contentItemDataSource">
+        <property key="contentItemAssociation" type="association" dataSource="blocksDataSource">
             <caption>Content Items Association to Block</caption>
             <description/>
             <associationTypes>
