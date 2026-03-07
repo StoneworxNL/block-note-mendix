@@ -20,7 +20,7 @@ export interface BlockNoteProps {
     contentItemAssociation: ListReferenceValue;
 }
 
-export function BlockNoteWrapper({ jsonPayload, saveAction, isEditable, themeEnum, blocksDataSource, blockId, blockType, contentItemDataSource, contentItemAssociation }: BlockNoteProps): ReactElement {
+export function BlockNoteWrapper({ jsonPayload, saveAction, isEditable, themeEnum, blocksDataSource }: BlockNoteProps): ReactElement {
     
     const defaultContent = '[{"type": "paragraph","props": {"textColor": "default","backgroundColor": "default","textAlignment": "left"},"content": [],"children": []}]';
     const [initialContent, setInitialContent] = useState<PartialBlock[] | undefined | "loading">("loading");
