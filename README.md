@@ -50,8 +50,8 @@ From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we ca
 ## Usage
 1. Create a database entity to store the JSON configuration of the Block Note.
 2. Add a dataview to a page and fetch the aforementioned configuration.
-2. Inside the dataview, add the block-note widget.
-3. Set it as editable (Yes) or Read-only (No), set the theme (light or dark), and add a Save action. There's also an attribute configuration, to load an initial configuration and save it afterwards.
+3. Inside the dataview, add the block-note widget.
+4. Set it as editable (Yes) or Read-only (No), set the theme (light or dark), and add a Save action. There's also an attribute configuration, to load an initial configuration and save it afterwards.
 
 ![Usage in Mendix Studio Pro](https://github.com/StoneworxNL/block-note-mendix/blob/main/images/studioproconfig.png)
 
@@ -63,7 +63,7 @@ From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we ca
 
 ## Issues, suggestions and feature requests
 Minor issue with the Code Block, where the code is all coloured black, so there's no colour to distinguish different parts of a code snippet.
-We are working in improving it and adding features to make this widget more flexible for different purposes. Feel free to suggest us new features and report issues.
+We are working on improving it and adding features to make this widget more flexible for different purposes. Feel free to suggest new features to us and report issues.
 
 ## License
 
