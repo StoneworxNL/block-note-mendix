@@ -1,4 +1,4 @@
-import { ReactElement, createElement } from "react";
+import { ReactElement } from "react";
 import { BlockNoteContainerProps } from "../typings/BlockNoteProps";
 import { BlockNoteWrapper } from "./components/BlockNoteWrapper";
 import "./ui/BlockNote.css";

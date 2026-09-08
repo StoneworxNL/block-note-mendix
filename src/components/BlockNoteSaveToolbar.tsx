@@ -1,4 +1,4 @@
-import { ReactElement, createElement } from "react";
+import { ReactElement } from "react";
 import { BlockNoteEditor } from "@blocknote/core";
 import { ActionValue, EditableValue } from "mendix";
 import { flattenBlocks, blockFromDocument, flatBlock } from "../typescript/flatten";
