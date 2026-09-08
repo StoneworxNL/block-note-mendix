@@ -1,10 +1,17 @@
-import { ReactElement, createElement, useEffect, useState, useMemo } from "react";
+import { ReactElement, useEffect, useState, useMemo } from "react";
 import { BlockNoteView } from "@blocknote/mantine";
 import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
 import { BlockNoteSaveToolbar } from "./BlockNoteSaveToolbar";
 import { ActionValue, EditableValue } from "mendix";
 import "@blocknote/core/fonts/inter.css";
+// These three are what "@blocknote/mantine/style.css" pulls in on its own, in the
+// same cascade order. They are imported separately because its nested
+// `@import url("@blocknote/react/style.css")` only resolves through the package
+// exports map, which postcss-import cannot follow (rollup's node-resolve can).
+// See the matching plugin in rollup.config.js, which drops the nested @imports.
 import "@blocknote/mantine/style.css";
+import "@blocknote/react/style.css";
+import "@blocknote/mantine/blocknoteStyles.css";
 
 export interface BlockNoteProps {
     jsonPayload: EditableValue<string>;
