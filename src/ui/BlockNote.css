@@ -1,5 +1,8 @@
 
 .blocknote-save-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     padding-bottom: 10px;
 }
 
@@ -9,7 +12,7 @@
     width: 100px;
 }
 
-.bn-side-menu .bn-drag-handle {
+.blocknote-mendix-wrapper .bn-side-menu .bn-drag-handle {
     padding-top: 5px;
 }
 
@@ -17,7 +20,7 @@
     color: #cfcfcf;
 }
 
-.bn-block .bn-block-content[data-content-type="checkListItem"] div div {
+.blocknote-mendix-wrapper .bn-block .bn-block-content[data-content-type="checkListItem"] div div {
     padding-right: 8px;
     padding-top: 6px;
 }
@@ -36,5 +39,19 @@
 .blocknote-mx-dark .blocknote-load-error {
     border-color: #7a3b3a;
     background-color: #2c1f1f;
+    color: #e8a5a3;
+}
+
+.blocknote-save-btn .btn[disabled] {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.blocknote-save-error {
+    font-size: 0.9em;
+    color: #912d2b;
+}
+
+.blocknote-mx-dark .blocknote-save-error {
     color: #e8a5a3;
 }

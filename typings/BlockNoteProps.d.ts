@@ -4,7 +4,7 @@
  * @author Mendix Widgets Framework Team
  */
 import { CSSProperties } from "react";
-import { ActionValue, EditableValue } from "mendix";
+import { ActionValue, DynamicValue, EditableValue } from "mendix";
 
 export type ThemeEnumEnum = "light" | "dark";
 
@@ -16,6 +16,7 @@ export interface BlockNoteContainerProps {
     jsonPayload: EditableValue<string>;
     isEditable: boolean;
     saveAction?: ActionValue;
+    saveCaption?: DynamicValue<string>;
     themeEnum: ThemeEnumEnum;
 }
 
@@ -33,5 +34,6 @@ export interface BlockNotePreviewProps {
     jsonPayload: string;
     isEditable: boolean;
     saveAction: {} | null;
+    saveCaption: string;
     themeEnum: ThemeEnumEnum;
 }

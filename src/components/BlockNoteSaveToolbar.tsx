@@ -1,39 +1,28 @@
 import { ReactElement } from "react";
-import { BlockNoteEditor } from "@blocknote/core";
-import { ActionValue, EditableValue } from "mendix";
 
 export interface BlockNoteSaveProps {
-    jsonPayload: EditableValue<string>;
-    saveAction?: ActionValue;
-    editor: BlockNoteEditor;
+    caption: string;
+    isDirty: boolean;
+    isSaving: boolean;
+    error?: string;
+    onSave: () => void;
 }
 
-export function BlockNoteSaveToolbar({ jsonPayload, saveAction, editor }: BlockNoteSaveProps): ReactElement {
-
-    const handleSave = () => {
-        if (saveAction && !saveAction.isExecuting) {
-            if (saveAction.canExecute) {
-                // Persist the document in BlockNote's own JSON shape - the exact
-                // shape BlockNoteEditor.create({ initialContent }) expects when the
-                // widget loads it back in BlockNoteWrapper. Anything that reshapes
-                // the tree here has to be reversed on load, or nesting, link text
-                // and table rows are silently dropped on the next read.
-                jsonPayload.setValue(
-                    JSON.stringify(editor.document, null, 2)
-                );
-                saveAction.execute();
-            } else {
-                console.log('Save not possible as Save action cannot be executed.');
-            }
-        } else {
-            console.log('Save not possible as Save action is either unavailable or executing.');
-        }
-    };
-
+// Presentational only. Deciding what a save means - whether the attribute is
+// writable, whether a Save Action is configured - belongs with the editor state
+// in BlockNoteWrapper, not here.
+export function BlockNoteSaveToolbar({ caption, isDirty, isSaving, error, onSave }: BlockNoteSaveProps): ReactElement {
     return (
         <div className="blocknote-save-btn">
-            <button className="btn mx-button" onClick={handleSave}>Save</button>
+            {/* type="button" so the widget cannot submit an enclosing form. */}
+            <button className="btn mx-button" type="button" onClick={onSave} disabled={!isDirty || isSaving}>
+                {caption}
+            </button>
+            {error && (
+                <span className="blocknote-save-error" role="alert">
+                    {error}
+                </span>
+            )}
         </div>
     );
-
 }
