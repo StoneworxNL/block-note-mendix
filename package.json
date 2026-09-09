@@ -34,9 +34,9 @@
     "rollup-plugin-typescript2": "^0.37.0"
   },
   "dependencies": {
-    "@blocknote/core": "^0.54.0",
-    "@blocknote/mantine": "^0.54.0",
-    "@blocknote/react": "^0.54.0",
+    "@blocknote/core": "^0.54.2",
+    "@blocknote/mantine": "^0.54.2",
+    "@blocknote/react": "^0.54.2",
     "@mantine/core": "^8.3.18",
     "@mantine/hooks": "^8.3.18",
     "classnames": "^2.5.1",
@@ -60,12 +60,14 @@
     "react-dom": "18.2.0"
   },
   "resolutions": {
+    "@y/y": "14.0.0-rc.26",
     "@types/react": "19.0.0",
     "@types/react-dom": "19.0.0",
     "react-native": "0.78.2",
     "@types/react-native": "0.78.2"
   },
   "overrides": {
+    "@y/y": "14.0.0-rc.26",
     "@types/react": "19.0.0",
     "@types/react-dom": "19.0.0",
     "react-native": "0.78.2",
