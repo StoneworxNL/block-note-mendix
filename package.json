@@ -22,7 +22,9 @@
     "lint": "pluggable-widgets-tools lint",
     "lint:fix": "pluggable-widgets-tools lint:fix",
     "prerelease": "npm run lint",
-    "release": "pluggable-widgets-tools release:web"
+    "release": "pluggable-widgets-tools release:web",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": "11.8.1",
@@ -53,18 +55,18 @@
     "form-data": ">=4.0.6",
     "ip": ">=2.0.1"
   },
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
   "resolutions": {
-    "react": "19.0.0",
     "@types/react": "19.0.0",
-    "react-dom": "19.0.0",
     "@types/react-dom": "19.0.0",
     "react-native": "0.78.2",
     "@types/react-native": "0.78.2"
   },
   "overrides": {
-    "react": "19.0.0",
     "@types/react": "19.0.0",
-    "react-dom": "19.0.0",
     "@types/react-dom": "19.0.0",
     "react-native": "0.78.2",
     "@types/react-native": "0.78.2"

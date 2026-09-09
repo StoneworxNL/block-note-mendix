@@ -56,6 +56,33 @@ From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we ca
 ![Usage in Mendix Studio Pro](https://github.com/StoneworxNL/block-note-mendix/blob/main/images/studioproconfig.png)
 
 
+## Development
+
+```bash
+npm install
+npm test      # jest, jsdom
+npm run lint
+npm run build
+```
+
+Unit tests live next to the code they cover, in `src/**/__tests__/*.spec.tsx`, and
+run on every pull request via GitHub Actions.
+
+Two things about the setup are worth knowing before changing it:
+
+- **React is a peer dependency, pinned to 18.2.0.** The Mendix client supplies
+  React at runtime and it is external in the bundle, so the widget never ships a
+  copy. It is declared (rather than left out) because the test suite needs a real
+  React to render against, and pinned to 18.2.0 because that is what the Mendix
+  client actually bundles. Do not move it into `devDependencies` or add it back
+  to `overrides`/`resolutions`: the Pluggable Widgets Tools migration check
+  scans those four fields and will interrupt `npm run lint` and `npm run build`
+  with a prompt to "fix" it.
+- **The editor is mocked in tests.** The CommonJS build of `@blocknote/core`
+  expects a default export from `@tiptap/core` that Tiptap 3 does not provide, so
+  it cannot be required under jest without experimental ESM mode. The tests cover
+  the widget's own save/load state machine, not BlockNote itself.
+
 ## Demo project
 - [Mendix app running on the cloud](https://block-note-demo-sandbox.mxapps.io/index.html?profile=Responsive)
 - [Mendix demo module (.mpk)](https://github.com/StoneworxNL/block-note-mendix/blob/main/demo/BlockNoteDemo.mpk)
