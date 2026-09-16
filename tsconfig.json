@@ -1,7 +1,10 @@
 {
   "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
   "compilerOptions": {
-    "baseUrl": "./"
+    "baseUrl": "./",
+    // The tools base narrows `types` to jest+node, which drops the jest-dom
+    // matchers the Mendix test setup registers at runtime.
+    "types": ["jest", "node", "testing-library__jest-dom"]
   },
   "include": ["./src", "./typings"]
 }

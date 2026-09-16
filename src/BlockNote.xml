@@ -36,6 +36,11 @@
                 <description>Action to be performed when button is clicked.</description>
             </property>
 
+            <property key="saveCaption" type="textTemplate" required="false">
+                <caption>Save Caption</caption>
+                <description>Label for the save button. Defaults to "Save" when left empty.</description>
+            </property>
+
             <property key="themeEnum" type="enumeration" defaultValue="light">
                 <caption>Theme</caption>
                 <description />
