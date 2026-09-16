@@ -89,7 +89,12 @@ export function BlockNoteWrapper({
     // Mendix can mark the attribute read-only independently of the widget's own
     // Editable setting (page security, a conditionally read-only dataview), and
     // setValue on a read-only attribute does not stick.
-    const canEdit = isEditable && !jsonPayload.readOnly;
+    //
+    // An attribute that is not available yet - reloading, or gone because the
+    // dataview lost its object - has nothing to write to either: the load effect
+    // already refuses to read one, so offering Save on it would only let the
+    // widget mark itself clean against a write that never landed.
+    const canEdit = isEditable && !jsonPayload.readOnly && jsonPayload.status === "available";
 
     // Loads stored editor contents (https://www.blocknotejs.org/examples/backend/saving-loading)
     // Re-runs whenever the stored value changes underneath us, so switching the
@@ -149,7 +154,11 @@ export function BlockNoteWrapper({
     }, [editor]);
 
     const handleSave = useCallback(() => {
-        if (!editor || editor === "unreadable" || jsonPayload.readOnly) {
+        // Mendix can flip either flag on the object the widget is already
+        // holding, so the toolbar can still be live when the click lands. A
+        // write that cannot stick must not advance syncedValue or clear dirty,
+        // or the edit is lost with nothing left saying it was never stored.
+        if (!editor || editor === "unreadable" || jsonPayload.readOnly || jsonPayload.status !== "available") {
             return;
         }
 

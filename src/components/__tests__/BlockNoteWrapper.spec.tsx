@@ -308,6 +308,57 @@ describe("BlockNoteWrapper", () => {
         });
     });
 
+    describe("unavailable attributes", () => {
+        it("withdraws the toolbar when the attribute stops being available mid-edit", () => {
+            const payload = attribute(storedJson("stored"));
+            const setValue = setValueOf(payload);
+            const { update } = renderWrapper(payload);
+
+            type("edited");
+
+            // Same stored value, so no reload - only availability flips. The
+            // load effect already refuses to read an unavailable attribute, and
+            // a write to one would not stick either.
+            update(
+                attribute(storedJson("stored"), {
+                    status: "unavailable",
+                    setValue
+                } as Partial<EditableValue<string>>)
+            );
+
+            expect(screen.queryByRole("button", { name: "Save" })).not.toBeInTheDocument();
+            expect(screen.getByTestId("editor")).toHaveAttribute("data-editable", "false");
+            expect(setValue).not.toHaveBeenCalled();
+
+            // The edit is still there and still unsaved, so once the attribute
+            // comes back the toolbar offers it again rather than having quietly
+            // marked the document clean against a write that never happened.
+            update(attribute(storedJson("stored"), { setValue }));
+
+            expect(saveButton()).toBeEnabled();
+            expect(setValue).not.toHaveBeenCalled();
+        });
+
+        it("refuses to write when the attribute stopped being available after the toolbar rendered", () => {
+            const payload = attribute(storedJson("stored"));
+            renderWrapper(payload);
+
+            type("edited");
+            expect(saveButton()).toBeEnabled();
+
+            // Mendix flips status on the object the widget is already holding.
+            // Nothing has re-rendered yet, so the toolbar is still live and a
+            // click can land - setValue on an unavailable attribute would not
+            // stick, and clearing dirty on it would lose the edit silently.
+            (payload as { status: string }).status = "unavailable";
+            fireEvent.click(saveButton());
+
+            expect(setValueOf(payload)).not.toHaveBeenCalled();
+            // Still dirty, so the edit has not been declared saved.
+            expect(saveButton()).toBeEnabled();
+        });
+    });
+
     describe("unreadable content", () => {
         const expectRefusedToLoad = (payload: EditableValue<string>): void => {
             expect(screen.getByRole("alert")).toHaveTextContent("could not be opened");
@@ -357,6 +408,25 @@ describe("BlockNoteWrapper", () => {
 
             expect(createEditor).toHaveBeenCalledTimes(1);
             expectRefusedToLoad(payload);
+        });
+
+        it("refuses to keep the editor open when the stored value is corrupted underneath", () => {
+            const payload = attribute(storedJson("stored"));
+            const setValue = setValueOf(payload);
+            const { update } = renderWrapper(payload);
+
+            expect(screen.getByTestId("editor")).toBeInTheDocument();
+
+            // A microflow or an import mapping rewrites the attribute with
+            // something unreadable while it stays available. Leaving the loaded
+            // document on screen would let the next Save overwrite whatever is
+            // still sitting in the attribute and can be repaired.
+            update(attribute("{ not json at all", { setValue }));
+
+            expect(screen.getByRole("alert")).toHaveTextContent("could not be opened");
+            expect(screen.queryByTestId("editor")).not.toBeInTheDocument();
+            expect(screen.queryByRole("button", { name: "Save" })).not.toBeInTheDocument();
+            expect(setValue).not.toHaveBeenCalled();
         });
 
         it("recovers once the attribute holds a readable document again", () => {
