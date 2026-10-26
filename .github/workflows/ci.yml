@@ -12,13 +12,11 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            # @mendix/pluggable-widgets-tools 11.8.1 declares engines.node >=20, and
-            # the versions that would run on 22 are held back for the reasons recorded
-            # against the exact pin in package.json. 20 is what the widget is built
-            # with locally, so it is what CI checks against.
+            # @mendix/pluggable-widgets-tools 11.12.1 and later declare engines.node
+            # ^22.18.0, so CI runs on 22 to match the local build.
             - uses: actions/setup-node@v4
               with:
-                  node-version: 20
+                  node-version: 22
                   cache: npm
 
             - run: npm ci
