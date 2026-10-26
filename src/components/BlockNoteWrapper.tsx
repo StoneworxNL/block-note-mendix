@@ -80,6 +80,15 @@ export function BlockNoteWrapper({
     const [isDirty, setIsDirty] = useState(false);
     const [saveError, setSaveError] = useState<string | undefined>(undefined);
 
+    // ActionValue.execute() reports nothing back, so the widget cannot tell a
+    // Save Action that committed from one that failed validation or rolled
+    // back. Clearing dirty on click would then leave the button disabled with
+    // the edit possibly unsaved, and no way to retry short of typing again.
+    // Instead, after a Save Action run the button stays available: it is
+    // disabled while the run is in flight (isSaving) and offered again once it
+    // ends. Re-running a save that did succeed only writes the same document.
+    const [canRetrySave, setCanRetrySave] = useState(false);
+
     // The exact string the editor currently represents. Lets the load effect
     // tell a genuine external change - the dataview moving to another object, a
     // microflow rewriting the attribute - apart from the echo of our own
@@ -118,6 +127,7 @@ export function BlockNoteWrapper({
 
         syncedValue.current = raw;
         setIsDirty(false);
+        setCanRetrySave(false);
         setSaveError(undefined);
         setLoad(raw ? readStoredDocument(raw) : { state: "ready", content: EMPTY_DOCUMENT });
     }, [jsonPayload]);
@@ -190,6 +200,8 @@ export function BlockNoteWrapper({
         if (saveAction) {
             saveAction.execute();
         }
+
+        setCanRetrySave(saveAction !== undefined);
     }, [editor, jsonPayload, saveAction]);
 
     const rootClassName = classNames("blocknote-mendix-wrapper", "blocknote-mx-" + themeEnum, className);
@@ -222,9 +234,9 @@ export function BlockNoteWrapper({
             {canEdit && (
                 <BlockNoteSaveToolbar
                     caption={saveCaption && saveCaption.value ? saveCaption.value : "Save"}
-                    isDirty={isDirty}
+                    isDirty={isDirty || canRetrySave}
                     isSaving={saveAction ? saveAction.isExecuting : false}
-                    error={saveError}
+                    error={saveError ?? jsonPayload.validation}
                     onSave={handleSave}
                 />
             )}

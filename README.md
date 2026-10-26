@@ -48,7 +48,7 @@ From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we ca
 ![View-only Mode](https://github.com/StoneworxNL/block-note-mendix/blob/main/images/viewmodedemo.png)
 
 ## Usage
-1. Create a database entity to store the JSON configuration of the Block Note.
+1. Create a database entity with a String attribute to store the document. Set the attribute length to **unlimited**: Mendix strings default to 200 characters, and a document is usually several kilobytes, so with the default the first save fails.
 2. Add a dataview to a page and fetch the aforementioned configuration.
 3. Inside the dataview, add the block-note widget.
 4. Set it as editable (Yes) or Read-only (No), set the theme (light or dark), and add a Save action. There's also an attribute configuration, to load an initial configuration and save it afterwards.
