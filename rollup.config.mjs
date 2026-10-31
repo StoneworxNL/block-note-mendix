@@ -42,9 +42,7 @@ const shimReactDomClient = {
         return source === "react-dom/client" ? REACT_DOM_CLIENT_SHIM_ID : null;
     },
     load(id) {
-        return id === REACT_DOM_CLIENT_SHIM_ID
-            ? 'export { createRoot, hydrateRoot } from "react-dom";'
-            : null;
+        return id === REACT_DOM_CLIENT_SHIM_ID ? 'export { createRoot, hydrateRoot } from "react-dom";' : null;
     }
 };
 
@@ -80,6 +78,41 @@ const stripUnresolvableBlockNoteCssImports = {
     }
 };
 
+// Since 0.57 the emoji picker loads its data per locale through dynamic
+// imports in @blocknote/core/emoji-data. A Mendix widget must inline every
+// dynamic import, which pulled all 24 locales into the bundle and doubled it
+// (8 MB -> 16 MB). The picker takes its locale from the editor dictionary,
+// which this widget leaves at the English default, so only "en" is ever
+// loaded. Every other locale is pointed at the English chunk instead. If the
+// widget ever sets a dictionary, add that locale to KEEP_EMOJI_LOCALES.
+const KEEP_EMOJI_LOCALES = ["en"];
+
+const keepOnlyUsedEmojiLocales = {
+    name: "keep-only-used-emoji-locales",
+    transform(code, id) {
+        if (!id.replace(/\\/g, "/").endsWith("@blocknote/core/dist/emoji-data.js")) {
+            return null;
+        }
+
+        // Entries of the locale map, e.g. `en: () => import("./en-BGdzE27X.js")`
+        // or `"zh-hant": () => import("./zh-hant-2ZrAkFnC.js")`.
+        const localeLoader = /("?)([a-z]+(?:-[a-z]+)?)\1: \(\) => import\("(\.\/[^"]+\.js)"\)/g;
+        const english = [...code.matchAll(localeLoader)].find(match => match[2] === "en");
+
+        if (!english) {
+            this.warn("emoji-data.js no longer has an English locale loader; emoji locales left untrimmed.");
+            return null;
+        }
+
+        return {
+            code: code.replace(localeLoader, (match, quote, locale) =>
+                KEEP_EMOJI_LOCALES.includes(locale) ? match : `${quote}${locale}${quote}: () => import("${english[3]}")`
+            ),
+            map: null
+        };
+    }
+};
+
 export default args => {
     const baseConfig = args.configDefaultConfig;
 
@@ -101,9 +134,7 @@ export default args => {
         ];
 
         // Ensure output is always an array
-        const outputs = Array.isArray(cleaned.output)
-            ? cleaned.output
-            : [cleaned.output];
+        const outputs = Array.isArray(cleaned.output) ? cleaned.output : [cleaned.output];
 
         // Move dynamic import settings into each output block. A Mendix widget is
         // loaded as a single file, so dynamic imports always have to be inlined -
@@ -129,6 +160,7 @@ export default args => {
             shimReactDomClient,
             stripDeadJsxImportSourcePragma,
             stripUnresolvableBlockNoteCssImports,
+            keepOnlyUsedEmojiLocales,
             ...(cleaned.plugins ?? []),
             json()
         ];
