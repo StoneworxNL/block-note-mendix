@@ -1,7 +1,7 @@
 {
   "name": "blocknote",
   "widgetName": "BlockNote",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Block-Based React rich text editor. Easily add a modern text editing experience to your app. Based on https://www.npmjs.com/package/@blocknote/core.",
   "copyright": "JL 2025",
   "author": "João Lopes",
@@ -34,9 +34,9 @@
     "rollup-plugin-typescript2": "^0.37.0"
   },
   "dependencies": {
-    "@blocknote/core": "^0.56.0",
-    "@blocknote/mantine": "^0.56.0",
-    "@blocknote/react": "^0.56.0",
+    "@blocknote/core": "^0.57.0",
+    "@blocknote/mantine": "^0.57.0",
+    "@blocknote/react": "^0.57.0",
     "@mantine/core": "^8.3.18",
     "@mantine/hooks": "^8.3.18",
     "classnames": "^2.5.1",
