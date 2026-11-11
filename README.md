@@ -94,7 +94,6 @@ Three things about the setup are worth knowing before changing it:
 
 ## Demo project
 - [Mendix app running on the cloud](https://block-note-demo-sandbox.mxapps.io/index.html?profile=Responsive)
-- [Mendix demo module (.mpk)](https://github.com/StoneworxNL/block-note-mendix/blob/main/demo/BlockNoteDemo.mpk)
 - [Mendix demo scss (.scss)](https://github.com/StoneworxNL/block-note-mendix/blob/main/demo/demo.scss)
 
 ## Issues, suggestions and feature requests

@@ -1,4 +1,7 @@
 import json from "@rollup/plugin-json";
+import { copyFileSync, mkdirSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 // Newer @tiptap/* packages (pulled in by @blocknote/core) ship already-compiled
 // dist files that still carry a leftover `@jsxImportSource` pragma comment from
@@ -87,6 +90,23 @@ const stripUnresolvableBlockNoteCssImports = {
 // widget ever sets a dictionary, add that locale to KEEP_EMOJI_LOCALES.
 const KEEP_EMOJI_LOCALES = ["en"];
 
+// pluggable-widgets-tools copies LICENSE into the .mpk with a glob built from a
+// joined path. On Windows that path has backslashes, the glob matches nothing,
+// and the .mpk ships without LICENSE (Linux builds, such as CI, are fine). Copy
+// it ourselves at the start of every config. The tools clear dist/tmp/widgets
+// only in the first config and create the .mpk at the end of each one, so the
+// copy made by the last config is always in the final .mpk.
+const WIDGET_ROOT = dirname(fileURLToPath(import.meta.url));
+const WIDGET_TMP_DIR = join(WIDGET_ROOT, "dist", "tmp", "widgets");
+
+const copyLicenseIntoMpk = {
+    name: "copy-license-into-mpk",
+    buildStart() {
+        mkdirSync(WIDGET_TMP_DIR, { recursive: true });
+        copyFileSync(join(WIDGET_ROOT, "LICENSE"), join(WIDGET_TMP_DIR, "LICENSE"));
+    }
+};
+
 const keepOnlyUsedEmojiLocales = {
     name: "keep-only-used-emoji-locales",
     transform(code, id) {
@@ -161,6 +181,7 @@ export default args => {
             stripDeadJsxImportSourcePragma,
             stripUnresolvableBlockNoteCssImports,
             keepOnlyUsedEmojiLocales,
+            copyLicenseIntoMpk,
             ...(cleaned.plugins ?? []),
             json()
         ];
