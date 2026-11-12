@@ -17,10 +17,16 @@ jobs:
               with:
                   fetch-depth: 0
             - name: Scan the full history for secrets
+              # When updating the version, take the SHA-256 of the linux_x64 tarball from the
+              # release's gitleaks_<version>_checksums.txt.
               env:
                   GITLEAKS_VERSION: 8.30.1
+                  GITLEAKS_SHA256: 551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
               run: |
-                  curl -sSL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" | tar xz gitleaks
+                  tarball="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+                  curl -sSfLo "$tarball" "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/${tarball}"
+                  echo "${GITLEAKS_SHA256}  ${tarball}" | sha256sum --check --strict
+                  tar xzf "$tarball" gitleaks
                   ./gitleaks git . --no-banner --redact --verbose
 
     licenses:
@@ -37,7 +43,7 @@ jobs:
             # PSF-2.0 is the Python license (argparse, via js-yaml), same as Python-2.0.
             - name: Check licenses
               run: >
-                  npx --yes license-checker-rseidelsohn@4 --production --excludePrivatePackages
+                  npx --yes license-checker-rseidelsohn@4.4.2 --production --excludePrivatePackages
                   --excludePackagesStartingWith "@mendix/;@blocknote/core@;@blocknote/react@;@blocknote/mantine@;blocknote@"
                   --onlyAllow "MIT;MIT-0;ISC;BSD-2-Clause;BSD-3-Clause;0BSD;Apache-2.0;Python-2.0;PSF-2.0;CC0-1.0;BlueOak-1.0.0"
             # The @blocknote/xl-* packages are GPL-3.0 or commercial and must never be bundled.
