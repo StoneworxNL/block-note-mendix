@@ -439,6 +439,65 @@ describe("BlockNoteWrapper", () => {
         });
     });
 
+    describe("documents saved by 2.1.x", () => {
+        // The flat shape the old save path wrote: parentId on every block, and a
+        // link's text as a sibling entry pointing back through parentContent.
+        const legacyJson = JSON.stringify([
+            {
+                id: "a",
+                type: "bulletListItem",
+                props: EMPTY_PARAGRAPH.props,
+                parentId: null,
+                content: [{ id: "x1", type: "text", text: "Parent", styles: {}, parentContent: null }]
+            },
+            {
+                id: "b",
+                type: "bulletListItem",
+                props: EMPTY_PARAGRAPH.props,
+                parentId: "a",
+                content: [
+                    { id: "x2", type: "link", href: "https://example.com", parentContent: null },
+                    { id: "x3", type: "text", text: "link text", styles: { bold: true }, parentContent: "x2" }
+                ]
+            }
+        ]);
+
+        it("opens them with nesting and link text rebuilt, without touching the attribute", () => {
+            const info = jest.spyOn(console, "info").mockImplementation(() => undefined);
+            const payload = attribute(legacyJson);
+            renderWrapper(payload);
+            info.mockRestore();
+
+            expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+            expect(screen.getByTestId("editor")).toBeInTheDocument();
+
+            const [{ initialContent }] = createEditor.mock.calls[createEditor.mock.calls.length - 1];
+            expect(initialContent).toHaveLength(1);
+            expect(initialContent[0].parentId).toBeUndefined();
+            expect(initialContent[0].children[0].content).toEqual([
+                {
+                    type: "link",
+                    href: "https://example.com",
+                    content: [{ type: "text", text: "link text", styles: { bold: true } }]
+                }
+            ]);
+            expect(setValueOf(payload)).not.toHaveBeenCalled();
+        });
+
+        it("saves them back in BlockNote's own shape", () => {
+            const info = jest.spyOn(console, "info").mockImplementation(() => undefined);
+            const payload = attribute(legacyJson);
+            renderWrapper(payload);
+            info.mockRestore();
+
+            type("edited");
+            fireEvent.click(saveButton());
+
+            expect(setValueOf(payload)).toHaveBeenCalledTimes(1);
+            expect(setValueOf(payload).mock.calls[0][0]).not.toContain("parentId");
+        });
+    });
+
     describe("empty attributes", () => {
         it.each([
             ["absent", undefined],
