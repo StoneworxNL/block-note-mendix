@@ -2,6 +2,7 @@ import { CSSProperties, ReactElement, useCallback, useEffect, useMemo, useRef, u
 import { BlockNoteView } from "@blocknote/mantine";
 import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
 import { BlockNoteSaveToolbar } from "./BlockNoteSaveToolbar";
+import { isLegacyFlatDocument, migrateLegacyFlatDocument } from "../utils/legacyDocument";
 import { ActionValue, DynamicValue, EditableValue } from "mendix";
 import classNames from "classnames";
 import "@blocknote/core/fonts/inter.css";
@@ -60,10 +61,19 @@ function readStoredDocument(raw: string): LoadState {
 
     // BlockNote rejects a genuinely empty array. An empty array holds no user
     // content either way, so opening a fresh document instead loses nothing.
-    return {
-        state: "ready",
-        content: parsed.length > 0 ? (parsed as PartialBlock[]) : EMPTY_DOCUMENT
-    };
+    if (parsed.length === 0) {
+        return { state: "ready", content: EMPTY_DOCUMENT };
+    }
+
+    // Written by 2.1.x or earlier: rebuild the nested tree before BlockNote sees
+    // it. The attribute itself is left alone; the next Save stores the document
+    // in the current shape.
+    if (isLegacyFlatDocument(parsed)) {
+        console.info("BlockNote: converting a document saved by an older version of the widget.");
+        return { state: "ready", content: migrateLegacyFlatDocument(parsed) as PartialBlock[] };
+    }
+
+    return { state: "ready", content: parsed as PartialBlock[] };
 }
 
 export function BlockNoteWrapper({
