@@ -29,6 +29,10 @@ jobs:
 
             - run: npm test
 
+            # Real BlockNote under jsdom: a stored javascript:/data: link must never
+            # render as a clickable href.
+            - run: npm run test:links
+
             # Production build: the .mpk includes LICENSE and dependencies.txt.
             - run: npm run release
 
