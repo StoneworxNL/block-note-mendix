@@ -222,6 +222,49 @@ describe("legacy documents saved by 2.1.x", () => {
             expect(migrated[1].content).toEqual([text("orphan")]);
         });
 
+        it("keeps blocks whose parents form a cycle instead of dropping them", () => {
+            const stored = [
+                { id: "r", type: "paragraph", props: PROPS, parentId: null, content: [] },
+                { id: "a", type: "paragraph", props: PROPS, parentId: "b", content: [] },
+                { id: "b", type: "paragraph", props: PROPS, parentId: "a", content: [] },
+                { id: "c", type: "paragraph", props: PROPS, parentId: "c", content: [] },
+                { id: "d", type: "paragraph", props: PROPS, parentId: "e", content: [] },
+                { id: "e", type: "paragraph", props: PROPS, parentId: "f", content: [] },
+                { id: "f", type: "paragraph", props: PROPS, parentId: "d", content: [] }
+            ];
+
+            const tree = (blocks: any[]): any[] => blocks.map(b => [b.id, tree(b.children)]);
+
+            expect(tree(migrateLegacyFlatDocument(stored))).toEqual([
+                ["r", []],
+                ["a", [["b", []]]],
+                ["c", []],
+                ["d", [["f", [["e", []]]]]]
+            ]);
+        });
+
+        it("keeps inline items whose parents form a cycle instead of dropping them", () => {
+            const stored = [
+                {
+                    id: "p",
+                    type: "paragraph",
+                    props: PROPS,
+                    parentId: null,
+                    content: [
+                        { id: "x", type: "link", href: "https://a.example", parentContent: "y" },
+                        { id: "y", type: "link", href: "https://b.example", parentContent: "x" },
+                        { id: "z", type: "text", text: "kept", styles: {}, parentContent: "z" }
+                    ]
+                }
+            ];
+
+            expect(migrateLegacyFlatDocument(stored)[0].content).toEqual([
+                text("https://a.example"),
+                text("https://b.example"),
+                text("kept")
+            ]);
+        });
+
         it("turns a link whose text was lost into its URL as plain text", () => {
             const stored = [
                 {
