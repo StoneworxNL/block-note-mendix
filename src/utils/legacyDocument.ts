@@ -21,6 +21,43 @@ const isObject = (value: unknown): value is JsonObject =>
 
 const has = (value: JsonObject, key: string): boolean => Object.prototype.hasOwnProperty.call(value, key);
 
+interface FlatEntry {
+    node: JsonObject;
+    parent: unknown;
+}
+
+/**
+ * Resolves each entry's parent by id and drops the parent links that would
+ * close a cycle (A -> B -> A, which only a hand-edited document can contain).
+ * The cycle is broken at the member that comes first in the flat list, so it
+ * lands in the root at its own position, like an orphan, and the rest of the
+ * cycle stays nested under it. Nothing is left unreachable from the root.
+ */
+function resolveParents(entries: FlatEntry[], ids: Map<string, FlatEntry>): Map<FlatEntry, FlatEntry | undefined> {
+    const parents = new Map<FlatEntry, FlatEntry | undefined>();
+
+    for (const entry of entries) {
+        const owner = typeof entry.parent === "string" ? ids.get(entry.parent) : undefined;
+        parents.set(entry, owner === entry ? undefined : owner);
+    }
+
+    for (const entry of entries) {
+        const seen = new Set<FlatEntry>([entry]);
+        let owner = parents.get(entry);
+
+        while (owner && !seen.has(owner)) {
+            seen.add(owner);
+            owner = parents.get(owner);
+        }
+
+        if (owner === entry) {
+            parents.set(entry, undefined);
+        }
+    }
+
+    return parents;
+}
+
 // Block types whose content was not an inline-content array and therefore came
 // back from the old save path as an empty array.
 const TABLE_BLOCK = "table";
@@ -47,9 +84,9 @@ export function isLegacyFlatDocument(blocks: unknown[]): boolean {
  * old serializer added.
  */
 function unflattenContent(flatContent: unknown[]): JsonObject[] {
-    const items = new Map<string, JsonObject>();
+    const items = new Map<string, FlatEntry>();
     const roots: JsonObject[] = [];
-    const ordered: Array<{ item: JsonObject; parent: unknown }> = [];
+    const ordered: FlatEntry[] = [];
 
     for (const entry of flatContent) {
         if (!isObject(entry)) {
@@ -64,22 +101,28 @@ function unflattenContent(flatContent: unknown[]): JsonObject[] {
             item.content = [];
         }
 
+        const flat: FlatEntry = { node: item, parent: parentContent };
+
         if (typeof id === "string") {
-            items.set(id, item);
+            items.set(id, flat);
         }
 
-        ordered.push({ item, parent: parentContent });
+        ordered.push(flat);
     }
 
-    for (const { item, parent } of ordered) {
-        const owner = typeof parent === "string" ? items.get(parent) : undefined;
+    const parents = resolveParents(ordered, items);
 
-        if (owner && Array.isArray(owner.content)) {
-            (owner.content as JsonObject[]).push(item);
+    for (const entry of ordered) {
+        const owner = parents.get(entry)?.node;
+
+        // Only text goes inside a link; the old serializer never nested links,
+        // so a link pointing at another link comes from a hand edit.
+        if (owner && Array.isArray(owner.content) && entry.node.type !== "link") {
+            (owner.content as JsonObject[]).push(entry.node);
         } else {
-            // No parent, or a parent that is missing: keep the item rather than
-            // dropping the user's text.
-            roots.push(item);
+            // No parent, a parent that is missing, one closing a cycle, or a
+            // link inside a link: keep the item rather than dropping the text.
+            roots.push(entry.node);
         }
     }
 
@@ -99,9 +142,9 @@ function unflattenContent(flatContent: unknown[]): JsonObject[] {
  * tree.
  */
 export function migrateLegacyFlatDocument(flatBlocks: unknown[]): JsonObject[] {
-    const blocks = new Map<string, JsonObject>();
+    const blocks = new Map<string, FlatEntry>();
     const roots: JsonObject[] = [];
-    const ordered: Array<{ block: JsonObject; parent: unknown }> = [];
+    const ordered: FlatEntry[] = [];
 
     for (const entry of flatBlocks) {
         if (!isObject(entry)) {
@@ -132,20 +175,25 @@ export function migrateLegacyFlatDocument(flatBlocks: unknown[]): JsonObject[] {
             ];
         }
 
+        const flat: FlatEntry = { node: block, parent: parentId };
+
         if (typeof block.id === "string") {
-            blocks.set(block.id, block);
+            blocks.set(block.id, flat);
         }
 
-        ordered.push({ block, parent: parentId });
+        ordered.push(flat);
     }
 
-    for (const { block, parent } of ordered) {
-        const owner = typeof parent === "string" ? blocks.get(parent) : undefined;
+    const parents = resolveParents(ordered, blocks);
 
-        if (owner && owner !== block) {
-            (owner.children as JsonObject[]).push(block);
+    for (const entry of ordered) {
+        const owner = parents.get(entry)?.node;
+
+        if (owner) {
+            (owner.children as JsonObject[]).push(entry.node);
         } else {
-            roots.push(block);
+            // A root block, an orphan, or the block that breaks a cycle.
+            roots.push(entry.node);
         }
     }
 
