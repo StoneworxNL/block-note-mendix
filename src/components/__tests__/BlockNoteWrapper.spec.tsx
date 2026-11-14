@@ -206,6 +206,12 @@ describe("BlockNoteWrapper", () => {
             expect(saveButton()).toBeDisabled();
         });
 
+        it("shows the attribute's own validation message, such as a value that is too long", () => {
+            renderWrapper(attribute(storedJson("stored"), { validation: "The value is too long." }));
+
+            expect(screen.getByRole("alert")).toHaveTextContent("The value is too long.");
+        });
+
         it("reports a save action that cannot run, and leaves the attribute alone", () => {
             const payload = attribute(storedJson("stored"));
             const saveAction = action({ canExecute: false });
@@ -544,9 +550,18 @@ describe("BlockNoteWrapper", () => {
             expect(setValueOf(payload)).not.toHaveBeenCalled();
         });
 
-        it("does not re-run a completed save on a second click", () => {
-            const payload = attribute(storedJson("stored"));
+        // Like Mendix, execute() marks the action it was called on as running.
+        const runningAction = (): ActionValue => {
             const saveAction = action();
+            executeOf(saveAction).mockImplementation(() => {
+                (saveAction as { isExecuting: boolean }).isExecuting = true;
+            });
+            return saveAction;
+        };
+
+        it("does not re-run a save on a second click while it is in flight", () => {
+            const payload = attribute(storedJson("stored"));
+            const saveAction = runningAction();
             renderWrapper(payload, { saveAction });
 
             type("edited");
@@ -555,6 +570,40 @@ describe("BlockNoteWrapper", () => {
 
             expect(executeOf(saveAction)).toHaveBeenCalledTimes(1);
             expect(setValueOf(payload)).toHaveBeenCalledTimes(1);
+        });
+
+        it("offers Save again once the save action has finished, so a failed run can be retried", () => {
+            const payload = attribute(storedJson("stored"));
+            const saveAction = runningAction();
+            const { update } = renderWrapper(payload, { saveAction });
+
+            type("edited");
+            fireEvent.click(saveButton());
+
+            // The widget cannot tell success from a microflow that failed
+            // validation or rolled back: execute() reports nothing back.
+            (saveAction as { isExecuting: boolean }).isExecuting = false;
+            const echo = attribute(storedJson("edited"));
+            update(echo);
+
+            expect(saveButton()).toBeEnabled();
+
+            fireEvent.click(saveButton());
+
+            expect(executeOf(saveAction)).toHaveBeenCalledTimes(2);
+            expect(setValueOf(echo)).toHaveBeenCalledWith(storedJson("edited"));
+        });
+
+        it("goes back to disabled when another object is loaded after a save", () => {
+            const saveAction = runningAction();
+            const { update } = renderWrapper(attribute(storedJson("stored")), { saveAction });
+
+            type("edited");
+            fireEvent.click(saveButton());
+            (saveAction as { isExecuting: boolean }).isExecuting = false;
+            update(attribute(storedJson("another object")));
+
+            expect(saveButton()).toBeDisabled();
         });
 
         it("disables the button while a save is in flight", () => {

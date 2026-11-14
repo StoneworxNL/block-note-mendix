@@ -20,7 +20,7 @@
 
             <property key="jsonPayload" type="attribute">
                 <caption>JSON Payload</caption>
-                <description>JSON string to save configuration through import mapping.</description>
+                <description>String attribute that stores the document as BlockNote JSON. Set its length to unlimited: Mendix strings default to 200 characters, which a document outgrows almost immediately.</description>
                 <attributeTypes>
                     <attributeType name="String" />
                 </attributeTypes>
