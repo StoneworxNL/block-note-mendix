@@ -94,7 +94,6 @@ Three things about the setup are worth knowing before changing it:
 
 ## Demo project
 - [Mendix app running on the cloud](https://block-note-demo-sandbox.mxapps.io/index.html?profile=Responsive)
-- [Mendix demo module (.mpk)](https://github.com/StoneworxNL/block-note-mendix/blob/main/demo/BlockNoteDemo.mpk)
 - [Mendix demo scss (.scss)](https://github.com/StoneworxNL/block-note-mendix/blob/main/demo/demo.scss)
 
 ## Issues, suggestions and feature requests
@@ -108,3 +107,12 @@ BlockNote (the library upon this widget is based on) is licensed under the [MPL 
 ⚠️ If you download this widget from the Mendix Marketplace and **change the Block Note's source code, not the widget's code itself**, you are expected to publish them [here](https://github.com/TypeCellOS/BlockNote), as per the license mentioned above.
 
 The widget itself is under MIT.
+### Third-party licenses
+
+-   The widget bundles `@blocknote/core`, `@blocknote/react` and `@blocknote/mantine`, which are licensed under
+    MPL-2.0. They are used unmodified; their source is at
+    [github.com/TypeCellOS/BlockNote](https://github.com/TypeCellOS/BlockNote).
+-   All other bundled packages are MIT. The full license texts of every bundled package are in `dependencies.txt`
+    inside the `.mpk`.
+-   The `@blocknote/xl-*` packages (AI, multi-column, PDF/DOCX/ODT export, …) are GPL-3.0 or commercially licensed
+    and are not used by this widget. Do not add them.
