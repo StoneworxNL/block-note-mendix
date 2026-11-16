@@ -7,10 +7,6 @@ updates:
       groups:
           dependencies:
               patterns: ["*"]
-      ignore:
-          # Mantine 9+ requires React 19; the widget is on React 18.
-          - dependency-name: "@mantine/*"
-            update-types: ["version-update:semver-major"]
     - package-ecosystem: github-actions
       directory: /
       schedule:
