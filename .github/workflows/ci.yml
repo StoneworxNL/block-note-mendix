@@ -42,7 +42,7 @@ jobs:
                   unzip -l "$mpk" | grep -q " LICENSE$" || { echo "LICENSE missing from $mpk"; exit 1; }
                   unzip -l "$mpk" | grep -q " dependencies.txt$" || { echo "dependencies.txt missing from $mpk"; exit 1; }
 
-            - uses: actions/upload-artifact@v4
+            - uses: actions/upload-artifact@v7
               with:
                   name: widget-mpk
                   path: dist/*/*.mpk
