@@ -14,7 +14,7 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v7
 
             # @mendix/pluggable-widgets-tools 11.12.1 and later declare engines.node
             # ^22.18.0, so CI runs on 22 to match the local build.
