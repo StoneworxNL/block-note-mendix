@@ -18,7 +18,7 @@ jobs:
 
             # @mendix/pluggable-widgets-tools 11.12.1 and later declare engines.node
             # ^22.18.0, so CI runs on 22 to match the local build.
-            - uses: actions/setup-node@v4
+            - uses: actions/setup-node@v7
               with:
                   node-version: 22
                   cache: npm
