@@ -32,12 +32,33 @@ const stripDeadJsxImportSourcePragma = {
 // second copy of react-dom is not an option either - it would run a separate
 // ReactDOM against the host's React.
 //
-// Instead, point the subpath at a one-line shim that re-exports from the plain
-// "react-dom" module, which stays external and resolves to the host's copy.
-// Mendix currently ships React 18.2.0, whose react-dom entry does export
-// createRoot/hydrateRoot. React 19 removed them from that entry, so if Mendix
-// ever ships React 19 this shim has to change.
-const REACT_DOM_CLIENT_SHIM_ID = "\0react-dom-client-shim";
+// Instead, point the subpath at a shim over the plain "react-dom" module, which
+// stays external and resolves to the host's copy.
+//
+// What that module exposes depends on the Mendix version:
+// - Mendix 10 ships React 18.2, whose react-dom entry exports createRoot and
+//   hydrateRoot. The shim passes them through.
+// - Mendix 11.12 ships React 19.2, whose react-dom entry no longer has them, and
+//   the client still does not register "react-dom/client" (checked in the
+//   11.12.6 mxui.js). There is no host copy to use.
+//
+// That is safe today because @blocknote/react only calls createRoot in
+// createReactBlockSpec / createReactInlineContentSpec / createReactStyleSpec,
+// and only for a headless editor. A mounted BlockNoteView renders through
+// portals instead. The widget uses neither (tests/react-dom-client-shim.test.mjs
+// checks this). If a future change needs createRoot on React 19, the call fails
+// with a clear error instead of "createRoot is not a function".
+export const REACT_DOM_CLIENT_SHIM_ID = "\0react-dom-client-shim";
+
+export const REACT_DOM_CLIENT_SHIM_CODE = `import * as ReactDOM from "react-dom";
+function unavailable(name) {
+    return function () {
+        throw new Error("BlockNote widget: react-dom/client " + name + " is not available in this Mendix version (the host React " + ReactDOM.version + " does not expose it on react-dom).");
+    };
+}
+export const createRoot = typeof ReactDOM.createRoot === "function" ? ReactDOM.createRoot : unavailable("createRoot");
+export const hydrateRoot = typeof ReactDOM.hydrateRoot === "function" ? ReactDOM.hydrateRoot : unavailable("hydrateRoot");
+`;
 
 const shimReactDomClient = {
     name: "shim-react-dom-client",
@@ -45,7 +66,7 @@ const shimReactDomClient = {
         return source === "react-dom/client" ? REACT_DOM_CLIENT_SHIM_ID : null;
     },
     load(id) {
-        return id === REACT_DOM_CLIENT_SHIM_ID ? 'export { createRoot, hydrateRoot } from "react-dom";' : null;
+        return id === REACT_DOM_CLIENT_SHIM_ID ? REACT_DOM_CLIENT_SHIM_CODE : null;
     }
 };
 
