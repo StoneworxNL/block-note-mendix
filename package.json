@@ -1,7 +1,7 @@
 {
   "name": "blocknote",
   "widgetName": "BlockNote",
-  "version": "2.4.0",
+  "version": "3.0.0",
   "description": "Block-Based React rich text editor. Easily add a modern text editing experience to your app. Based on https://www.npmjs.com/package/@blocknote/core.",
   "copyright": "Stoneworx 2025",
   "author": "João Lopes",
@@ -14,6 +14,14 @@
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },
+  "cssnano": {
+    "preset": [
+      "default",
+      {
+        "calc": false
+      }
+    ]
+  },
   "packagePath": "stoneworx",
   "scripts": {
     "start": "pluggable-widgets-tools start:server",
@@ -25,43 +33,41 @@
     "release": "pluggable-widgets-tools release:web",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:links": "node --test tests/link-safety.test.mjs"
+    "test:links": "node --test tests/link-safety.test.mjs tests/react-dom-client-shim.test.mjs"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "11.15.0",
+    "@mendix/pluggable-widgets-tools": "11.16.0",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@types/big.js": "^7.0.0",
-    "jsdom": "^26.1.0",
+    "jsdom": "^31.0.0",
     "rollup-plugin-typescript2": "^0.37.0"
   },
   "dependencies": {
     "@blocknote/core": "^0.57.0",
     "@blocknote/mantine": "^0.57.0",
     "@blocknote/react": "^0.57.0",
-    "@mantine/core": "^8.3.18",
-    "@mantine/hooks": "^8.3.18",
+    "@mantine/core": "^9.8.0",
+    "@mantine/hooks": "^9.8.0",
     "classnames": "^2.5.1",
     "emoji-mart": "^5.6.0",
     "react-remove-scroll-bar": "^2.3.8"
   },
   "peerDependencies": {
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "resolutions": {
     "@y/y": "14.0.0-rc.26",
-    "@types/react": "19.0.0",
-    "@types/react-dom": "19.0.0",
-    "react-native": "0.78.2",
-    "@types/react-native": "0.78.2"
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "react-native": "0.88.0"
   },
   "overrides": {
     "@y/y": "14.0.0-rc.26",
-    "@types/react": "19.0.0",
-    "@types/react-dom": "19.0.0",
-    "react-native": "0.78.2",
-    "@types/react-native": "0.78.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "react-native": "0.88.0",
     "fast-xml-parser@>=5": "^5.11.2",
     "js-yaml@>=5": "^5.5.0",
     "lodash": "^4.18.1",
@@ -69,6 +75,12 @@
     "svgo@>=4 <5": "^4.1.0",
     "serialize-javascript": "^7.1.4",
     "immutable": "^5.1.9",
-    "form-data@>=4": "^4.0.6"
+    "form-data@>=4": "^4.0.6",
+    "shell-quote": "^1.12.0",
+    "node-forge": "^1.4.3",
+    "brace-expansion@<2": "^1.1.22",
+    "brace-expansion@>=5": "^5.0.13",
+    "handlebars": "^4.7.10",
+    "source-map-js": "^1.2.2"
   }
 }

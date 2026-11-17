@@ -7,6 +7,18 @@ Now, [BlockNote](https://github.com/TypeCellOS/BlockNote) is available as a Mend
 
 <img alt="Mendix Pluggable Widget Block Note Logo" src="https://github.com/StoneworxNL/block-note-mendix/blob/main/images/logo.jpeg" width="65px"/>
 
+## Requirements
+
+| Widget version | Studio Pro / Mendix | React (supplied by Mendix) |
+| --- | --- | --- |
+| **3.x** | **11.10.0 or newer** | 19.2 |
+| 2.4.x | 10.x and 11.x | 18.2 / 19 |
+
+-   **3.x requires Studio Pro 11.10.0 or newer.** It uses Mantine 9, which needs React 19.2, and Mendix ships React 19.2
+    from Studio Pro 11.10.0 onwards. Studio Pro 11.12.5 and 11.12.6 have been verified.
+-   **On Mendix 10, stay on 2.4.x.** Mendix 10 ships React 18, which 3.x does not support. Use the
+    [V2.4.0 release](https://github.com/StoneworxNL/block-note-mendix/releases/tag/V2.4.0).
+
 ## Features
 Mendix pluggable widget where you can simply add an editor to your web application.
 From [BlockNote (Github README), ](https://github.com/TypeCellOS/BlockNote)we can see all of the features and components provided by the editor. Some of them are:
@@ -70,14 +82,20 @@ run on every pull request via GitHub Actions.
 
 Three things about the setup are worth knowing before changing it:
 
-- **React is a peer dependency, pinned to 18.2.0.** The Mendix client supplies
+- **React is a peer dependency, `^19.2.0`.** The Mendix client supplies
   React at runtime and it is external in the bundle, so the widget never ships a
   copy. It is declared (rather than left out) because the test suite needs a real
-  React to render against, and pinned to 18.2.0 because that is what the Mendix
-  client actually bundles. Do not move it into `devDependencies` or add it back
-  to `overrides`/`resolutions`: the Pluggable Widgets Tools migration check
-  scans those four fields and will interrupt `npm run lint` and `npm run build`
-  with a prompt to "fix" it.
+  React to render against, and set to `^19.2.0` because that is what the Mendix
+  client bundles from Studio Pro 11.10.0 onwards and what Mantine 9 requires. Do
+  not move it into `devDependencies` or add `react`/`react-dom` to
+  `overrides`/`resolutions`: the Pluggable Widgets Tools migration check scans
+  those four fields and will interrupt `npm run lint` and `npm run build` with a
+  prompt to "fix" it. (`@types/react` and `@types/react-dom` are in there on
+  purpose, at the versions that check expects.)
+  The Mendix client registers `react-dom` but not `react-dom/client`, and on
+  React 19 `react-dom` no longer has `createRoot`. `rollup.config.mjs` maps
+  `react-dom/client` to a shim that throws a clear error if that is ever needed.
+  The widget does not call it today, and CI checks the bundle stays that way.
 - **`@y/y` is pinned in `overrides`/`resolutions` but never installed.**
   `@blocknote/core` optionally peer-depends on `@y/y` for collaborative editing,
   which this widget does not use. Every published `@y/y` is a prerelease, and
